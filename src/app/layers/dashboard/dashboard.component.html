@@ -1,0 +1,41 @@
+@if(isLoading){
+    <div class="spinner-overlay">
+      <mat-spinner></mat-spinner>
+    </div>
+  }
+  <div class="row">
+    <div class="col-md-6 col-sm-12 m-0 p-0">
+  
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Planlanan Sınavlar</mat-card-title>
+       </mat-card-header>
+        <mat-card-content>
+         <app-dashboard-exam-list></app-dashboard-exam-list>
+        </mat-card-content>
+      </mat-card>
+      
+    </div>
+    <div class="col-md-6 col-sm-12 m-0 p-0">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Sınav Doluluk Oranları</mat-card-title>
+       </mat-card-header>
+        <mat-card-content>
+          <app-dashboard-exam-chart></app-dashboard-exam-chart>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <div class="row">
+    
+    <div class="col-md-12 col-sm-12 m-o p-0">
+        <mat-card>
+          <mat-card-header>Günlük Kayıt Takip Listesi</mat-card-header>
+          <mat-card-content>
+            <app-dashboard-student-list></app-dashboard-student-list>
+          </mat-card-content>
+        </mat-card>
+    </div>
+  </div>
+  

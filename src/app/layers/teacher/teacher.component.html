@@ -1,0 +1,37 @@
+@if(isLoading){
+    <div class="spinner-overlay">
+      <mat-spinner></mat-spinner>
+    </div>
+  }
+<div class="row">
+    <div class="col-md-5 col-sm-12 p-0 m-0">
+        <mat-card>
+            <mat-card-header><mat-icon fontIcon="person"></mat-icon>Öğretmen İşlemleri</mat-card-header>
+            <mat-card-content>
+              <div class="row">
+
+              <div class="col-md-4 col-sm-12">
+                <button mat-flat-button color="primary" class="w-100" (click)="openDialog()"><mat-icon>person_add</mat-icon> Yeni Öğretmen Kartı</button>
+              </div>
+              <div class="col-md-4 col-sm-12">
+                <button mat-flat-button color="accent" class="w-100"><mat-icon>content_paste_search</mat-icon> Öğretmen Raporları</button>
+              </div>
+              <div class="col-md-4 col-sm-12">
+                <button mat-flat-button color="warn" class="w-100"><mat-icon>person_alert</mat-icon> Öğretmen Logları</button>
+
+              </div>
+            </div>  
+
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <div class="col-md-12 col-sm-12 m-0 p-0 mt-1">
+        <mat-card>
+          <mat-card-header>Güncel Öğretmen Listesi</mat-card-header>
+          <mat-card-content class=" p-0 m-0">
+            
+          </mat-card-content>
+        </mat-card>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+<h2 mat-dialog-title class="text-center">
+    <mat-icon>person</mat-icon> <br />
+    Yeni Öğrenci Kartı
+  </h2>
+  <mat-dialog-content>
+    <div class="row">
+      <form class="example-form">
+        <div class="col-12">
+          <mat-form-field class="example-full-width">
+            <mat-label>Ad</mat-label>
+            <input matInput placeholder="Öğrenci Adı" [(ngModel)]="newStudentData.ad" name="ad" />
+          </mat-form-field>
+        </div>
+        <div class="col-12">
+          <mat-form-field class="example-full-width">
+            <mat-label>Soyad</mat-label>
+            <input matInput placeholder="Öğrenci Soyadı" [(ngModel)]="newStudentData.soyad" name="soyad" />
+          </mat-form-field>
+        </div>
+        <div class="col-12">
+          <mat-form-field class="example-full-width">
+            <mat-label>Telefon</mat-label>
+            <input matInput placeholder="Öğrenci Cep Telefonu" [(ngModel)]="newStudentData.telefon"  [mask]="phoneMask" name="telefon" />
+          </mat-form-field>
+        </div>
+        <div class="col-12">
+          <mat-form-field class="example-full-width">
+            <mat-label>E-Posta</mat-label>
+            <input matInput placeholder="Öğrenci E-Posta Adresi" [(ngModel)]="newStudentData.eposta" name="eposta" />
+          </mat-form-field>
+        </div>
+      </form>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-6">
+          <button mat-flat-button color="warn" class="w-100" mat-dialog-close>İptal</button>
+        </div>
+        <div class="col-6">
+          <button mat-flat-button color="primary" class="w-100" cdkFocusInitial (click)="postUserData()">Kaydet</button>
+        </div>
+      </div>
+    </div>
+  </mat-dialog-actions>
+  <mat-progress-bar [mode]="progressBarMode" [value]="progressBarValue"></mat-progress-bar>
+
+  

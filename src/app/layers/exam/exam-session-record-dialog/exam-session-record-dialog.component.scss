@@ -1,0 +1,104 @@
+@use '@angular/material' as mat;
+
+mat-card{
+    height:100% !important;
+    max-height: 100% !important;
+}
+.recordCard{
+  height: auto !important;
+}
+button{
+    height: 60px;
+}
+section {
+    display: table;
+  }
+  
+  .example-label {
+    display: table-cell;
+    font-size: 14px;
+    margin-left: 8px;
+    min-width: 120px;
+  }
+  
+  .example-button-row {
+    display: table-cell;
+    max-width: 600px;
+  }
+  
+  .example-button-row .mat-mdc-button-base {
+    margin: 8px 8px 8px 0;
+  }
+  
+  .example-flex-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .example-button-container {
+    display: flex;
+    justify-content: center;
+    width: 120px;
+  }
+  @media screen and (max-width: 768px) {
+    button{
+        max-width: 100% !important;
+        width: 100% !important;
+        margin:0px !important;
+        margin-top: 1px !important;
+    }
+    section{
+        padding:0px !important;
+        margin:0px !important;
+    }
+  }
+
+  .example-card {
+    max-width: 100% !important;
+  }
+
+  .text-title-color{
+    color: #3f51b5;
+  }
+
+  .pl-0{
+    padding-left: 0px !important;
+  }
+
+  .pr-0{
+    padding-right: 0px !important;
+  }
+
+
+  .spinner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.8);
+    z-index: 1000;
+  }
+  
+  .blur {
+    filter: blur(5px);
+    pointer-events: none;
+  }
+
+  .example-h2 {
+    margin: 10px;
+  }
+  
+  .example-section {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    height: 60px;
+  }
+  .example-margin {
+    margin: 10px;
+  }

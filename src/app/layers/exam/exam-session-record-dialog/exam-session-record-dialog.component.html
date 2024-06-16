@@ -1,0 +1,175 @@
+
+@if(_isLoading){
+    <div class="spinner-overlay">
+        <mat-spinner></mat-spinner>
+    </div>
+    }
+<div class="container-fluid p-0 m-0">
+    
+    <div class="row p-0 m-0">
+        <div class="col-md-12 p-2 m-0" style="padding-left: 1.5rem !important; padding-right: 1.5rem !important">
+            <mat-card-title>
+                <h4 class="text-title-color" style="float: left !important">
+                    Oturum Bilgi Kartı
+                </h4>
+            </mat-card-title>
+            <button mat-icon-button color="warn" style="float: right !important" (click)="MatDialogClose()">
+                <mat-icon>close</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" style="float: right !important; margin-right: 10px;"
+                (click)="sessionRecordReload()">
+                <mat-icon>refresh</mat-icon>
+            </button>   
+            <button mat-icon-button color="primary"  style="float: right !important; margin-right: 10px;" (click)="sessionInfoUpdate()"><mat-icon>done_outline</mat-icon></button>
+        </div>
+    </div>
+    <div class="row p-0 m-0">
+        <div class="col-md-3 col-sm-12 p-4 m-0 pr-0">
+            <mat-card class="example-card">
+  
+                <mat-card-content>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <mat-form-field>
+                                <mat-label>UID</mat-label>
+                                <input matInput [(ngModel)]="examSessionInfo.examSessionUID" readonly="true" [disabled]="true" />
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-12">
+                            <mat-form-field>
+                                <mat-label>Oturum No</mat-label>
+                                <input matInput [(ngModel)]="examSessionInfo.oturumNo" readonly="true" [disabled]="true" />
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-12">
+                            <mat-form-field>
+                                <mat-label>Oturum Tarihi</mat-label>
+                                <input type="datetime-local" matInput [(ngModel)]="examSessionInfo.sessionDate" />
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-12">
+                            <mat-form-field>
+                                <mat-label>Oturum Bilgisi</mat-label>
+                                <textarea matInput [(ngModel)]="examSessionInfo.sessionBilgi"></textarea>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field>
+                                <mat-label>Kontenjan</mat-label>
+                                <input matInput [(ngModel)]="examSessionInfo.kontenjan" />
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <section class="example-section">
+                                <mat-slide-toggle class="example-margin" color="primary" [checked]="examSessionInfo.isActive">
+                                    @if(examSessionInfo.isActive == true){
+                                    <strong>Aktif Sınav</strong> }@else{
+                                    <strong>Sınav Kapalı</strong> }
+                                </mat-slide-toggle>
+                            </section>
+                        </div>
+                     
+             
+                        <mat-list role="list">
+                            <div class="row">
+
+                                <div class="col-6">
+                                    <mat-list-item>
+                                        <mat-icon matListItemIcon>person_add</mat-icon>
+                                        <div matListItemTitle>Oluşturan</div>
+                                        <div matListItemLine>{{ examSessionInfo.isCreatedUser.kullaniciAdi }}</div>
+                                      </mat-list-item>
+                                </div>
+                                        <div class="col-6">
+                                    <mat-list-item>
+                                        <mat-icon matListItemIcon>calendar_month</mat-icon>
+                                        <div matListItemTitle>Oluşturma Tarihi</div>
+                                        <div matListItemLine>{{ examSessionInfo.isCreatedDate | date: 'dd.MM.yyyy - HH:mm' }}</div>
+                                      </mat-list-item>
+                                </div>
+                                <div class="col-6">
+                                    <mat-list-item>
+                                        <mat-icon matListItemIcon>manage_accounts</mat-icon>
+                                        <div matListItemTitle>Güncelleyen</div>
+                                        <div matListItemLine>{{ examSessionInfo.isModifiedUser.kullaniciAdi }}</div>
+                                      </mat-list-item>
+                                </div>    
+                                <div class="col-6">
+                                    <mat-list-item>
+                                        <mat-icon matListItemIcon>calendar_month</mat-icon>
+                                        <div matListItemTitle>Güncelleme Tarihi</div>
+                                        <div matListItemLine>{{ examSessionInfo.isModifiedDate | date: 'dd.MM.yyyy : HH:mm' }}</div>
+                                      </mat-list-item>
+                                </div>
+
+                            </div>
+                                                        
+                          </mat-list>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="col-md-9 col-sm-12 p-4 m-0 pl-0">
+            <mat-card class="example-card">
+                <mat-card-content>
+                    <mat-tab-group>
+                        <mat-tab label="Tüm Sınav Bilgileri">
+                            <mat-card class="example-card">
+                                <mat-card-content>
+                                    <mat-card class="recordCard">
+                                        <mat-card-header>
+                                            <mat-card-title>Oturum Toplamları</mat-card-title>
+                                          </mat-card-header>
+                                        <mat-card-content>
+                                            <div class="row mt-2">
+                                                <div class="col-md-12 col-sm-6 mt-1">
+                                                    <div class="card text-bg-primary w-100">
+                                                        <div class="card-header">Toplam Kayıtlı Öğrenci</div>
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">{{ examSessionInfo.toplamKesinKayit | number:'1.2-2'  }}</h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 col-sm-6 mt-1">
+                                                    <div class="card text-bg-info w-100">
+                                                        <div class="card-header">Katılım Sağlayan</div>
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">{{ examSessionInfo.toplamKatilimSaglayan | number:'1.2-2'  }}</h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 col-sm-6 mt-1">
+                                                    <div class="card text-bg-warning w-100">
+                                                        <div class="card-header">Kitapçık Alan</div>
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">{{ examSessionInfo.toplamKitapcikAlan | number:'1.2-2'  }}</h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 col-sm-6 mt-1">
+                                                    <div class="card text-bg-danger w-100">
+                                                        <div class="card-header">Devamsız</div>
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">{{ examSessionInfo.toplamDevamsiz | number:'1.2-2'  }}</h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </mat-card-content>
+                                    </mat-card>
+                                </mat-card-content>
+                            </mat-card>
+                        </mat-tab>
+                        <mat-tab label="Öğrenci Kayıtları">
+                            <app-exam-session-student-list-for-session [sessionUID]="examSessionUID"></app-exam-session-student-list-for-session>
+                        </mat-tab>
+         
+                        <mat-tab label="Oturum Logları" [disabled]="false">
+                            <app-log-list [UID]="this.examSessionUID"></app-log-list>
+                        </mat-tab>
+                    </mat-tab-group>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>

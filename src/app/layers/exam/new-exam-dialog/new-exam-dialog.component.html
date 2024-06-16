@@ -1,0 +1,66 @@
+<h2 mat-dialog-title class="text-primary mt-2">Yeni Sınav Kartı <button mat-icon-button color="warn" style="float:right !important;"
+    (click)="MatDialogClose();">
+    <mat-icon>close</mat-icon>
+  </button>
+</h2>
+
+<mat-dialog-content>
+  <div class="col-12">
+    <div class="row" [formGroup]="newExamFormGroup">
+      <div class="col-md-6">
+        <mat-form-field class="example-full-width">
+          <mat-label>Sınav Adı</mat-label>
+          <input matInput placeholder="Sınav Adı" formControlName="denemeAdi"/>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field class="example-full-width">
+          <mat-label>Kategori</mat-label>
+          <input matInput placeholder="Sınav Kategorisi" formControlName="sinavKategori"/>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-label>Görsel</mat-label>
+        <input type="file" class="form-control" style="margin-top: -7px;" (change)="onFileSelected($event)" />
+        <img id="yayinLogoPicture" class="img-thumbnail"
+        [src]="base64Image"  />
+      </div>
+      <div class="col-md-6">
+        <mat-form-field class="example-full-width">
+          <mat-label>Yayın</mat-label>
+          <input matInput placeholder="Yayın Adı" formControlName="yayinAdi"/>
+        </mat-form-field>
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field class="example-full-width">
+              <mat-label>Ücret</mat-label>
+              <input matInput placeholder="Sınav Ücreti" type="number" formControlName="ucret"/>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field class="example-full-width">
+              <mat-label>Sınav Yeri</mat-label>
+              <input matInput placeholder="Sınav Yeri" type="text" formControlName="sinavYeri"/>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field class="example-full-width">
+              <mat-label>Toplam Kitapçık(Opsiyonel)</mat-label>
+              <input matInput placeholder="Toplam Kitapçık" type="number" formControlName="kitapcikAdetMaliyet" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field class="example-full-width">
+              <mat-label>Kitapçık Maliyet(Opsiyonel)</mat-label>
+              <input matInput placeholder="Adet Maliyet" type="number" formControlName="kitapcikAdetMaliyet"/>
+            </mat-form-field>
+          </div>
+          <div class="col-12">
+            <button class="btnSinavAdd" mat-flat-button color="primary" [disabled]="newExamFormGroup.invalid"  (click)="newExam()">Yeni Sınav Oluştur</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-progress-bar [mode]="progressBarMode" [value]="progressBarValue"></mat-progress-bar>

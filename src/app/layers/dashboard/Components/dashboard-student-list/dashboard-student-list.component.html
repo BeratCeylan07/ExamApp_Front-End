@@ -1,0 +1,41 @@
+<mat-form-field>
+    <mat-label>Ara</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Öğrenci Adı" #input>
+  </mat-form-field>
+  
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+  
+
+
+      <ng-container matColumnDef="studentInfo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Öğrenci </th>
+        <td mat-cell *matCellDef="let row"> {{row.studentInfo}} </td>
+      </ng-container>
+         <ng-container matColumnDef="examInfo">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Sınav Bilgileri </th>
+          <td mat-cell *matCellDef="let row"> {{row.examInfo}} </td>
+        </ng-container>
+
+  
+      <ng-container matColumnDef="examSetDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Kayıt Tarihi </th>
+        <td mat-cell *matCellDef="let row"> {{ row.examSetDate | date:'dd.MM.yyyy' }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="examSetStatus">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Kayıt Durumu </th>
+        <td mat-cell *matCellDef="let row"> @if(row.examSetStatus === 1) { Kesin Kayıt }@else if(row.examSetStatus == 2) { Kitapçık Aldı }@else if(row.examSetStatus == 3) { Katılım Sağladı }@else if(row.examSetStatus == 0) { Ön Kayıt Talebi } </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="{{ row.examSetStatus == 0 ? 'bg-secondary text-white' : 'bg-success text-white'}}"></tr>
+  
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>
+    </table>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+
+  </div>
+  <mat-progress-bar [mode]="progressBarMode" [value]="progressBarValue"></mat-progress-bar>

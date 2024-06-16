@@ -1,0 +1,46 @@
+<div class="container-fluid p-0">
+    <div class="row">
+        <div class="col-md-12">
+            <mat-toolbar color="primary" class="example-toolbar">
+                <h1 style="margin-right: auto; margin-left: auto;">Sınav Takip Sistemine Hoş geldiniz</h1>
+            </mat-toolbar>        </div>
+    </div>
+    <div class="row mt-5" [class.blur]="isLoading">
+        <div class="col-md-6 text-center">
+            <img id="loginImage" src="../../../assets/image/login_image.jpeg">
+        </div>
+        <div class="col-md-6">
+            <div class="row p-5">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <mat-icon class="text-danger">lock</mat-icon>
+                    </div>
+                </div>
+                <div class="col-md-12 text-center">
+                    <mat-form-field class="w-100">
+                        <mat-label>Şube No</mat-label>
+                        <input matInput [(ngModel)]="loginObj.branchNo" [required]="false">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-12 text-center">
+                    <mat-form-field class="w-100">
+                        <mat-label>Kullanıcı Adı</mat-label>
+                        <input matInput [(ngModel)]="loginObj.userName" [required]="true">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-12 text-center">
+                    <mat-form-field class="w-100">
+                        <mat-label>Şifre</mat-label>
+                        <input type="password" matInput [(ngModel)]="loginObj.userPassword" [required]="true">
+                    </mat-form-field>
+                </div>
+                <div class="col-12 text-center">
+                    <button mat-flat-button color="primary" class="w-100" style="height: 60px;" (click)="onLogin()">Giriş</button>
+                </div>            
+            </div>
+        </div>
+    </div>
+    <div *ngIf="isLoading" class="spinner-overlay">
+        <mat-spinner></mat-spinner>
+    </div>
+</div>

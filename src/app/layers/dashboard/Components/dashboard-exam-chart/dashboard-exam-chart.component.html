@@ -1,0 +1,6 @@
+@if(isLoading){
+    <div class="spinner-overlay">
+      <mat-spinner></mat-spinner>
+    </div>
+  }
+  <canvasjs-chart [options]="chartOptions" (chartInstance)="getChartInstance($event)" [styles]="{width: '100%', height:'360px'}"></canvasjs-chart>    

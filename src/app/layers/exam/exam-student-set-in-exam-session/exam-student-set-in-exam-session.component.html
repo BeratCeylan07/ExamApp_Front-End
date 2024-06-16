@@ -1,0 +1,33 @@
+
+  <mat-stepper orientation="vertical">
+    <mat-step >
+      <form>
+        <ng-template matStepLabel>2.Öğrenci Seçimi</ng-template>
+        <mat-form-field>
+          <mat-label>Öğrenci</mat-label>
+          <!-- formControlName="sessionList" required -->
+          <mat-select [(value)]="selectedStudentUID">
+            @for (item of studentOptData; track $index) {
+              <mat-option [value]="item.uid">{{ item.ad }} {{ item.soyad }} </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        <div>
+          <button mat-flat-button class="w-100" color="primary" (click)="studentSessionSet()">Kaydet</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Sınav Bilgilerini Gönder</ng-template>
+      <div>
+        <button (click)="setWpMsg()" mat-flat-button class="btn-icon btn-whatsapp w-100" style="height:60px !important" [disabled]="wpBtn"
+        ><i class="fa fa-brands fa-whatsapp fa-3x float-start"></i> <span class="float-end">Whatsapp Üzerinden İlet</span>
+      </button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+  <mat-dialog-actions>
+    <button mat-button color="warn" [mat-dialog-close] cdkFocusInitial style="margin-left: auto;">Vazgeç</button>
+  </mat-dialog-actions>
+  <mat-progress-bar [mode]="progressBarMode" [value]="progressBarValue"></mat-progress-bar>

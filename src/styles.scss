@@ -1,0 +1,102 @@
+@import "../node_modules/bootstrap/scss/bootstrap";
+@import "../node_modules/font-awesome/css/font-awesome.min.css";
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+mat-card{
+    height:100% !important;
+    max-height: 100% !important;
+}
+
+button{
+    height: 60px;
+}
+section {
+    display: table;
+  }
+  
+  .example-label {
+    display: table-cell;
+    font-size: 14px;
+    margin-left: 8px;
+    min-width: 120px;
+  }
+  
+  .example-button-row {
+    display: table-cell;
+    max-width: 600px;
+  }
+  
+  .example-button-row .mat-mdc-button-base {
+    margin: 8px 8px 8px 0;
+  }
+  
+  .example-flex-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .example-button-container {
+    display: flex;
+    justify-content: center;
+    width: 120px;
+  }
+  @media screen and (max-width: 768px) {
+
+  #loginImage{
+    display: none !important;
+  }
+  }
+
+
+table {
+  width: 100%;
+}
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td, th {
+  width: 25%;
+}
+
+
+.spinner-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.8);
+  z-index: 1000;
+}
+
+.blur {
+  filter: blur(5px);
+  pointer-events: none;
+}
+
+
+
+.btn-whatsapp{
+  background-color: #00796b !important; /* Teal-800 rengi */
+  color: #ffffff !important; /* Beyaz metin rengi */
+}
+.btn-icon>.mdc-button__label{
+  
+    max-width: 100% !important;
+    width: 100% !important;
+}
+.cdk-overlay-pane.mat-mdc-dialog-panel{
+  overflow: auto;
+}
+.text-title-color{
+  color: #3f51b5;
+}

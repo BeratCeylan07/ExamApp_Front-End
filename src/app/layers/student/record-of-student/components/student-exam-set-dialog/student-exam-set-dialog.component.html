@@ -1,0 +1,50 @@
+
+
+<mat-stepper orientation="vertical">
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Sınav Seçimi</ng-template>
+      <mat-form-field>
+        <mat-label>Sınav</mat-label>
+        <!-- formControlName="sessionList" required -->
+        <mat-select formArrayName="exam" [(value)]="studentExamsetModel.examSessionUID" (selectionChange)="sessionListForExam()">
+          @for (item of examoptData; track $index) {
+            <mat-option [value]="item.examUID">{{ item.catAndPub }} / {{ item.examInfo }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext>İleri</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Oturum Seçimi</ng-template>
+      <mat-form-field>
+        <mat-label>Oturum</mat-label>
+        <!-- formControlName="sessionList" required -->
+        <mat-select formArrayName="session" [(value)]="studentExamsetModel.examSessionUID" required>
+          @for (item of sessionOptData; track $index) {
+            <mat-option [value]="item.uid">Oturum No: {{ item.oturumNo }} / Tarih: {{ item.tarih | date: 'dd.MM.yyyy - HH:mm' }} / Kontenjan: {{ item.kontenjan }} </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <div>
+        <button mat-flat-button class="w-100" color="primary" (click)="userExamSet()">Kaydet</button>
+      </div>
+    </form>
+  </mat-step>
+  <!-- <mat-step>
+    <ng-template matStepLabel>Sınav Bilgilerini Gönder</ng-template>
+    <div>
+      <button mat-flat-button class="btn-icon btn-whatsapp w-100" style="height:60px !important" [disabled]="wpBtn"
+      ><i class="fa fa-brands fa-whatsapp fa-3x float-start"></i> <span class="float-end">Whatsapp Üzerinden İlet</span>
+      </button>
+    </div>
+  </mat-step> -->
+</mat-stepper>
+<mat-dialog-actions>
+  <button mat-button color="warn" [mat-dialog-close] cdkFocusInitial style="margin-left: auto;">Vazgeç</button>
+</mat-dialog-actions>
+<mat-progress-bar [mode]="progressBarMode" [value]="progressBarValue"></mat-progress-bar>
