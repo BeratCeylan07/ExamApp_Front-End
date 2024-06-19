@@ -24,7 +24,7 @@
         </div>
     </div>
     <div class="row p-0 m-0">
-        <div class="col-md-3 col-sm-12 p-4 m-0 pr-0">
+        <div class="col-md-4 col-sm-12 p-0 m-0 pr-0">
             <mat-card class="example-card">
                 <mat-card-header>
                     <mat-card-title color="primary">Öğrenci Bilgileri</mat-card-title>
@@ -55,14 +55,14 @@
                             <div class="row">
                                 <mat-divider></mat-divider>
 
-                                <div class="col-12">
+                                <div class="col-6">
                                     <mat-list-item>
                                         <mat-icon matListItemIcon>person_add</mat-icon>
                                         <div matListItemTitle>Oluşturan</div>
                                         <div matListItemLine>{{ userInfo.isCreatedUser.kullaniciAdi }}</div>
                                       </mat-list-item>
                                 </div>
-                                <div class="col-12">
+                                <div class="col-6">
                                     <mat-list-item>
                                         <mat-icon matListItemIcon>calendar_month</mat-icon>
                                         <div matListItemTitle>Oluşturma Tarihi</div>
@@ -70,17 +70,17 @@
                                       </mat-list-item>
                                 </div>
                                 <mat-divider></mat-divider>
-                                <div class="col-12">
+                                <div class="col-6">
                                     <mat-list-item>
                                         <mat-icon matListItemIcon>manage_accounts</mat-icon>
                                         <div matListItemTitle>Güncelleyen</div>
                                         <div matListItemLine>{{ userInfo.isModifiedUser.kullaniciAdi }}</div>
                                       </mat-list-item>
                                 </div>    
-                                <div class="col-12">
+                                <div class="col-6">
                                     <mat-list-item>
                                         <mat-icon matListItemIcon>calendar_month</mat-icon>
-                                        <div matListItemTitle style="font-size:smaller">Güncelleme Tarihi</div>
+                                        <div matListItemTitle>Güncelleme Tarihi</div>
                                         <div matListItemLine>{{ userInfo.isModifiedDate | date: 'dd.MM.yyyy : HH:mm' }}</div>
                                       </mat-list-item>
                                 </div>
@@ -95,7 +95,7 @@
             </mat-card>
             
         </div>
-        <div class="col-md-9 col-sm-12 p-4 m-0 pl-0">
+        <div class="col-md-8 col-sm-12 p-0 m-0 pl-0">
             <mat-card class="example-card">
                 <mat-card-content>
                     <mat-tab-group>

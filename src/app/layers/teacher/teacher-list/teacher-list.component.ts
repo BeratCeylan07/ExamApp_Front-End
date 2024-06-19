@@ -16,6 +16,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { RecordOfTeacherComponent } from '../record-of-teacher/record-of-teacher.component';
 
 @Component({
   selector: 'app-teacher-list',
@@ -58,26 +59,26 @@ export class TeacherListComponent {
     }
   }
   constructor(public _dialog: MatDialog, private _cdr: ChangeDetectorRef, media: MediaMatcher, private _studentApiservice: AppExamApiService) {  }
-  openRecordOfTeacher(userUID: string){
-    this.studentRecordDialog(userUID);
-  }
-  studentRecordDialog(userUID: string){
-    this._subsink.sink = this._dialog.open(RecordOfStudentComponent, {
+
+  teacherRecordDialog(userUID: string){
+    console.log("giden UID:",userUID);
+    this._subsink.sink = this._dialog.open(RecordOfTeacherComponent, {
       data:userUID,
       disableClose:true,
       autoFocus:true,
-      width:"auto",
-      height:"auto",
+      maxWidth:"100%",
+      width:"100%",
+      height:"90%",
     }).afterClosed().subscribe(result => {
       // tekrar istek at
     });
   }
-  getStudentList(){
+  getTeacherList(){
     this.progressBarMode = 'indeterminate';
     this.progressBarValue = 40;  // Change to desired value
-    this._studentApiservice.get_UserList_For_UserLayer().subscribe((result) => {
+     this._subsink.sink = this._studentApiservice.get_TeacherList().subscribe((result) => {
       this.dataSource.data = result;
-     
+     console.log(result);
       this.progressBarMode = 'determinate';
       this.progressBarValue = 100;  // Change to desired value
 
@@ -85,17 +86,20 @@ export class TeacherListComponent {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     },
-    (error) => {
+    (error) => {  
       this.progressBarMode = 'determinate';
       this.progressBarValue = 100;  // Change to desired value
     });
   }
   ngOnInit(): void {
-    this.getStudentList();    
+    this.getTeacherList();    
   }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+  ngOnDestroy(): void {
+    this._subsink.unsubscribe();
   }
 }

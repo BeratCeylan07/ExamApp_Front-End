@@ -92,6 +92,27 @@ export class AppExamApiService {
     );
   }
 
+  get_TeacherList() {
+    const headers = { Authorization: 'Bearer ' + this.token };
+    return this._http.get<UserListModel[]>(
+      this._ENDPOINTURL + 'teacher/TeacherList?subeID=1',
+      { headers: headers }
+    );
+  }
+  get_TeacherSums(teacherUID: string) {
+    const headers = { Authorization: 'Bearer ' + this.token };
+    return this._http.get<UserListModel[]>(
+      this._ENDPOINTURL + 'teacher/TeacherSums?teacherUID='+teacherUID,
+      { headers: headers }
+    );
+  }
+  get_TeacherInfo(teacherUID: string) {
+    const headers = { Authorization: 'Bearer ' + this.token };
+    return this._http.get<UserListModel[]>(
+      this._ENDPOINTURL + 'teacher/TeacherInfo?teacherUID='+teacherUID,
+      { headers: headers }
+    );
+  }
   get_UserRecord_Data(userUID: string) {
     const headers = { Authorization: 'Bearer ' + this.token };
     return this._http.get<StudentRecordModel[]>(
@@ -115,6 +136,18 @@ export class AppExamApiService {
 
     return this._http.post<any>(
       this._ENDPOINTURL + 'student/NewStudent',
+      studentData,
+      { headers: headers }
+    );
+  }
+  post_Teacher(studentData: any): Observable<any> {
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+      .set('Authorization', 'Bearer ' + this.token)
+      .set('Accept', 'text/plain');
+
+    return this._http.post<any>(
+      this._ENDPOINTURL + 'teacher/NewTeacher',
       studentData,
       { headers: headers }
     );
@@ -331,5 +364,22 @@ export class AppExamApiService {
         }
       );
     }
-  // DashBoard Requests End
+    get_lessonList(){
+      const headers = new HttpHeaders()
+      .set('Authorization', 'Bearer ' + this.token)
+      .set('Accept', 'text/plain');
+    return this._http.get<any>(
+      this._ENDPOINTURL + 'lesson/lesson_list?subeID=1',
+      { headers: headers }
+    );
+  }
+  get_teacher_session_setList(teacherUID: string){
+    const headers = new HttpHeaders()
+      .set('Authorization', 'Bearer ' + this.token)
+      .set('Accept', 'text/plain');
+    return this._http.get<any>(
+      this._ENDPOINTURL + 'lesson/Teacher_Lesson_Set_List?teacherUID='+teacherUID,
+      { headers: headers }
+    );
+  }
 }

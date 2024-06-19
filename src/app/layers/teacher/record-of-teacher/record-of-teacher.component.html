@@ -1,1 +1,169 @@
-<p>record-of-teacher works!</p>
+@if(_isLoading){
+    <div class="spinner-overlay">
+      <mat-spinner></mat-spinner>
+    </div>
+  }
+<div class="container-fluid p-0 m-0" style="height: 100% !important;">
+    <div class="row p-0 m-0">
+        <div class="col-md-12 p-2 m-0" style="padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;">
+            <mat-card-title>
+                <h1 class="text-title-color" style="float:left !important;">
+                    <i class="fa fa-graduation-cap" aria-hidden="true"></i> Öğretmen kartı
+                </h1>
+            </mat-card-title>
+            <button mat-icon-button color="warn" style="float:right !important;" (click)="MatDialogClose();">
+                <mat-icon>close</mat-icon>
+              </button>
+              <button mat-icon-button color="primary" style="float:right !important;" (click)="recordOfTeacherReload()">
+                <mat-icon>refresh</mat-icon>
+              </button>
+              <button mat-icon-button color="primary" style="float:right !important;"  (click)="teacherUpdate()">
+                <mat-icon>done_outline</mat-icon>
+            </button>
+        </div>
+    </div>
+    <div class="row p-0 m-0">
+        <div class="col-md-4 col-sm-12 p-0 m-0 pr-0">
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <mat-card-title color="primary">Öğrenci Bilgileri</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                        <mat-form-field>
+                            <mat-label>UID</mat-label>
+                            <input matInput [(ngModel)]="userInfo.teacherUID" [readonly]="true" [disabled]="true">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Ad</mat-label>
+                            <input matInput [(ngModel)]="userInfo.ad">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Soyad</mat-label>
+                            <input matInput [(ngModel)]="userInfo.soyad">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Telefon</mat-label>
+                            <input matInput [(ngModel)]="userInfo.telefon">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>E-Posta Adresi</mat-label>
+                            <input matInput [(ngModel)]="userInfo.eposta">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Mevcut Branş</mat-label>
+                            <mat-select [(ngModel)]="userInfo.setedLessonUID">
+                                @for (item of lessonOpt; track $index) {
+                                  <mat-option [value]="item.uid">{{ item.dersAd }}</mat-option>
+                                }
+                            </mat-select>                        
+                        </mat-form-field>
+                        <mat-list role="list">
+                            <div class="row">
+                                <mat-divider></mat-divider>
+
+                                <div class="col-6">
+                                    <mat-list-item>
+                                        <mat-icon matListItemIcon>person_add</mat-icon>
+                                        <div matListItemTitle>Oluşturan</div>
+                                        <div matListItemLine>{{ userInfo.isCreatedUser.kullaniciAdi }}</div>
+                                      </mat-list-item>
+                                </div>
+                                <div class="col-6">
+                                    <mat-list-item>
+                                        <mat-icon matListItemIcon>calendar_month</mat-icon>
+                                        <div matListItemTitle>Oluşturma Tarihi</div>
+                                        <div matListItemLine>{{ userInfo.isCreatedDate | date: 'dd.MM.yyyy - HH:mm' }}</div>
+                                      </mat-list-item>
+                                </div>
+                                <mat-divider></mat-divider>
+                                <div class="col-6">
+                                    <mat-list-item>
+                                        <mat-icon matListItemIcon>manage_accounts</mat-icon>
+                                        <div matListItemTitle>Güncelleyen</div>
+                                        <div matListItemLine>{{ userInfo.isModifiedUser.kullaniciAdi }}</div>
+                                      </mat-list-item>
+                                </div>    
+                                <div class="col-6">
+                                    <mat-list-item>
+                                        <mat-icon matListItemIcon>calendar_month</mat-icon>
+                                        <div matListItemTitle>Güncelleme Tarihi</div>
+                                        <div matListItemLine>{{ userInfo.isModifiedDate | date: 'dd.MM.yyyy : HH:mm' }}</div>
+                                      </mat-list-item>
+                                </div>
+
+                            </div>
+                                                        
+                          </mat-list>
+                          
+                </mat-card-content>      
+                          
+            </mat-card>
+        </div>
+        <div class="col-md-8 col-sm-12 p-0 m-0 pl-0">
+            <mat-card class="example-card">
+                <mat-card-content>
+                    <mat-tab-group>
+                        <mat-tab label="Dashboard">
+                            <div class="row">
+                                   <div class="col-md-12 col-sm-12 mt-1">
+                                <div class="card text-bg-primary w-100">
+                                    <div class="card-header">Haftada Kaç Gün?</div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ userSums.toplam_ders_tanim | number:'1.2-2' }}
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div> 
+                            <div class="col-sm-6 mt-1">
+                                <div class="card text-bg-primary w-100">
+                                    <div class="card-header">Haftalık Toplam Ders</div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ userSums.haftalik_oturum_toplam | number:'1.2-2' }}
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mt-1">
+                                <div class="card text-bg-primary w-100">
+                                    <div class="card-header">Haftalık Toplam Ders Saati</div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ userSums.haftalik_oturum_saat_toplam | number:'1.2-2' }}
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mt-1">
+                                <div class="card text-bg-primary w-100">
+                                    <div class="card-header">Günlük Toplam Ders</div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ userSums.gunluk_oturum_toplam | number:'1.2-2' }}
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mt-1">
+                                <div class="card text-bg-primary w-100">
+                                    <div class="card-header">Günlük Toplam Ders Saati</div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ userSums.gunluk_oturum_saat_toplam | number:'1.2-2' }}
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="Tanımlı Ders Oturumları"> 
+                            <app-teacher-ders-tanim-list [teacherUID]="teacherUID"></app-teacher-ders-tanim-list>
+                        </mat-tab>
+                        <mat-tab label="Ders Verdiği Öğrenciler"> 
+
+                        </mat-tab>
+                        <mat-tab label="Loglar"> 
+                        </mat-tab>
+                    </mat-tab-group>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>  

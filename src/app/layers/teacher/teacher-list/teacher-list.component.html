@@ -12,32 +12,32 @@
     <table mat-table [dataSource]="dataSource" matSort>
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Ad</th>
-        <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+        <td mat-cell *matCellDef="let row">{{ row.ad }}</td>
       </ng-container>
       <ng-container matColumnDef="surname">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>
           Soyad
         </th>
-        <td mat-cell *matCellDef="let row">{{ row.surname }}</td>
+        <td mat-cell *matCellDef="let row">{{ row.soyad }}</td>
       </ng-container>
       <ng-container matColumnDef="phone">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>
           Telefon
         </th>
-        <td mat-cell *matCellDef="let row">{{ row.phone }}</td>
+        <td mat-cell *matCellDef="let row">{{ row.tel }}</td>
       </ng-container>
       <ng-container matColumnDef="brans">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>
-          Telefon
+          Branş
         </th>
-        <td mat-cell *matCellDef="let row">Branş Bilgisi Gelecek</td>
+        <td mat-cell *matCellDef="let row">{{ row.userDersSets[0].ders.dersAd }}</td>
       </ng-container>
       <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>
           İşlemler
         </th>
         <td mat-cell *matCellDef="let row">    
-          <button mat-icon-button color="primary" (click)="studentRecordDialog(row.userUID)"><mat-icon>visibility</mat-icon></button>
+          <button mat-icon-button color="primary" (click)="teacherRecordDialog(row.uid)"><mat-icon>visibility</mat-icon></button>
         </td>
       </ng-container>
   

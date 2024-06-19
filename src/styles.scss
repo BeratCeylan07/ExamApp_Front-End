@@ -2,7 +2,9 @@
 @import "../node_modules/font-awesome/css/font-awesome.min.css";
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
+mat-sidenav-content{
+  min-height: 768px !important;
+}
 
 mat-card{
     height:100% !important;

@@ -17,7 +17,7 @@ import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { StudentListComponent } from "./student-list/student-list.component";
 import { RecordOfNewstudentComponent } from './record-of-newstudent/record-of-newstudent.component';
 import { NewStudentModel } from '../../Services/Models/StudentModels/StudentDataModel';
-import { NewUserSetComponent } from '../common-components/new-user-set/new-user-set.component';
+import { RecordOfStudentComponent } from './record-of-student/record-of-student.component';
 
 @Component({
     selector: 'app-student',
@@ -60,7 +60,7 @@ export class StudentComponent {
     }, 1000);
   }
   openDialog() {
-    const dialogRef = this.dialog.open(NewUserSetComponent, {
+    const dialogRef = this.dialog.open(RecordOfStudentComponent, {
       data:1,
       autoFocus:true,
       width:"500px",
