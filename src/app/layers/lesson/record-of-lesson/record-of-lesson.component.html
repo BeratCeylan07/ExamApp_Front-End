@@ -1,0 +1,210 @@
+@if(_isLoading){
+    <div class="spinner-overlay">
+        <mat-spinner></mat-spinner>
+    </div>
+    }
+    
+    <div class="container-fluid p-0 m-0">
+        <div class="row p-0 m-0">
+            <div id="dialogHeadBtn" class="col-md-12 p-2 m-0" style="padding-left: 1.5rem !important; padding-right: 1.5rem !important">
+                <mat-card-title>
+                    <h4 class="text-title-color" style="float: left !important">
+                        Ders Bilgi Kartı
+                    </h4>
+                </mat-card-title>
+                <button mat-icon-button color="warn" style="float: right !important" (click)="dialogClose()">
+                    <mat-icon>close</mat-icon>
+                </button>
+                <button mat-icon-button color="primary" style="float: right !important; margin-right: 10px;">
+                    <mat-icon>refresh</mat-icon>
+                </button>   
+                <button mat-icon-button color="primary"  style="float: right !important; margin-right: 10px;"><mat-icon>done_outline</mat-icon></button>
+            </div>
+        </div>
+        <div class="row p-0 m-0">
+            <div class="col-md-4 col-sm-12 p-4 m-0 pr-0">
+                <mat-card class="example-card">
+      
+                    <mat-card-content [formGroup]="lessonFormGroup">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <mat-form-field>
+                                    <mat-label>UID</mat-label>
+                                    <input matInput formControlName="uid" [(ngModel)]="lessonInfo.uid" readonly="true" [disabled]="true"/>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-12">
+                                <mat-form-field>
+                                    <mat-label>Ders Adı</mat-label>
+                                    <input matInput formControlName="dersAd" [(ngModel)]="lessonInfo.dersAd" />
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-12">
+                                <mat-form-field>
+                                    <mat-label>Bilgi</mat-label>
+                                    <input matInput formControlName="bilgi" [(ngModel)]="lessonInfo.bilgi" />
+                                </mat-form-field>
+                            </div>
+
+      
+                            <div class="col-md-12 col-sm-12">
+                                <section class="example-section">
+                                    <mat-slide-toggle class="example-margin" color="primary" [checked]="lessonInfo.isActive">
+                                        @if(lessonInfo.isActive == true){
+                                        <strong>Aktif Ders</strong> }@else{
+                                        <strong>Ders Kapalı</strong> }
+                                    </mat-slide-toggle>
+                                </section>
+                            </div>        
+                        </div>
+                        <div class="row mt-2">
+                            <mat-list role="list">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <mat-list-item>
+                                            <mat-icon matListItemIcon>person_add</mat-icon>
+                                            <div matListItemTitle>Oluşturan</div>
+                                            <div matListItemLine>{{ lessonInfo.isCreatedUser.kullaniciAdi }}</div>
+                                          </mat-list-item>
+                                    </div>
+                                            <div class="col-6">
+                                        <mat-list-item>
+                                            <mat-icon matListItemIcon>calendar_month</mat-icon>
+                                            <div matListItemTitle>Oluşturma Tarihi</div>
+                                            <div matListItemLine>{{ lessonInfo.isCreatedDate | date: 'dd.MM.yyyy - HH:mm' }}</div>
+                                          </mat-list-item>
+                                    </div>
+                                    <div class="col-6">
+                                        <mat-list-item>
+                                            <mat-icon matListItemIcon>manage_accounts</mat-icon>
+                                            <div matListItemTitle>Güncelleyen</div>
+                                            <div matListItemLine>{{ lessonInfo.isModifiedUser.kullaniciAdi }}</div>
+                                          </mat-list-item>
+                                    </div>    
+                                    <div class="col-6">
+                                        <mat-list-item>
+                                            <mat-icon matListItemIcon>calendar_month</mat-icon>
+                                            <div matListItemTitle>Güncelleme Tarihi</div>
+                                            <div matListItemLine>{{ lessonInfo.isModifiedDate | date: 'dd.MM.yyyy : HH:mm' }}</div>
+                                          </mat-list-item>
+                                    </div>
+    
+                                </div>
+                                                            
+                              </mat-list>
+                                                                                             
+                    </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <div class="col-md-8 col-sm-12 p-4 m-0 pl-0">
+                <mat-card class="example-card">
+                    <mat-card-content>
+                        <mat-tab-group>
+                            <mat-tab label="Tüm Ders Bilgileri">
+                                <mat-card class="example-card">
+                                    <mat-card-content>
+                                        <mat-card class="recordCard">
+                                            <mat-card-header>
+                                                <mat-card-title>Ders Toplamları</mat-card-title>
+                                              </mat-card-header>
+                                            <mat-card-content>
+                                                <div class="row mt-2">
+                                                    <div class="col-md-4 col-sm-6 mt-1">
+                                                        <div class="card text-bg-primary w-100">
+                                                            <div class="card-header">Toplam Oturum</div>
+                                                            <div class="card-body">
+                                                                <h5 class="card-title">{{ 0 | number:'1.2-2' }}
+                                                                </h5>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 col-sm-6 mt-1">
+                                                        <div class="card text-bg-info w-100">
+                                                            <div class="card-header">Kayıtlı Öğrenci Toplamı</div>
+                                                            <div class="card-body">
+                                                                <h5 class="card-title">{{ 0 | number:'1.2-2'  }}</h5>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 col-sm-6 mt-1">
+                                                        <div class="card text-bg-warning w-100">
+                                                            <div class="card-header">Toplam Kitapçık</div>
+                                                            <div class="card-body">
+                                                                <h5 class="card-title">{{ 0 | number:'1.2-2' }}</h5>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 col-sm-6 mt-1">
+                                                        <div class="card text-bg-danger w-100">
+                                                            <div class="card-header">Güncel Ciro</div>
+                                                            <div class="card-body">
+                                                                <h5 class="card-title">{{ 0 | number:'1.2-2'  }}
+                                                                </h5>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 col-sm-6 mt-1">
+                                                        <div class="card text-bg-success w-100">
+                                                            <div class="card-header">Toplam Mâliyet</div>
+                                                            <div class="card-body">
+                                                                <h5 class="card-title">{{ 0 | number:'1.2-2' }}</h5>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 col-sm-6 mt-1">
+                                                        <div class="card text-bg-dark w-100">
+                                                            <div class="card-header">Net Kâr</div>
+                                                            <div class="card-body">
+                                                                <h5 class="card-title">{{ 0 | number:'1.2-2' }}</h5>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </mat-card-content>
+                                        </mat-card>
+                                            <mat-card class="recordCard mt-2">
+                                                <mat-card-header>
+                                                    <mat-card-title>Diğer Ders İşlemleri</mat-card-title>
+                                                  </mat-card-header>
+                                                <mat-card-content>                                    
+                                                    <div class="row mt-2">
+    
+                                                    <div class="col-md-4 col-sm-6">
+                                                    
+                                                        <button mat-flat-button class="btn-icon btn-whatsapp w-100"
+                                                        [disabled]="false"><i class="fa fa-brands fa-whatsapp fa-3x float-start"></i> <span class="float-end">Whatsapp Mesajları</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-md-4 col-sm-6">
+                                                        <button mat-flat-button class="btn-icon w-100" color="primary" [disabled]="true"
+                                                        ><i class="fa fa-brands fa-bell fa-3x float-start"></i> <span class="float-end">Cihaz Bildirim Mesajları</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-md-4 col-sm-6">
+                                                        <button mat-flat-button class="btn-icon w-100" color="warn" [disabled]="false"
+                                                        ><i class="fa fa-solid fa-book fa-3x float-start"></i> <i class="fa fa-solid fa-chart-pie"></i> <span class="float-end">Ders Raporlama</span>
+                                                        </button>
+                                                    </div>
+                                                                                                                         
+                                                </div>
+    
+                                                </mat-card-content>   
+                                            </mat-card>
+                                    </mat-card-content>
+                                </mat-card>
+                            </mat-tab>
+                            <mat-tab label="Öğrenci Kayıtları">
+                                <app-student-list-of-lesson [lessonUID]="lessonUID"></app-student-list-of-lesson>
+                            </mat-tab>
+                            <mat-tab label="Oturumlar">
+                                <app-session-list-of-lesson [lessonUID]="lessonUID"></app-session-list-of-lesson>
+                            </mat-tab>
+                            <mat-tab label="Ders İşlem Logları" [disabled]="false">
+                            </mat-tab>
+                        </mat-tab-group>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </div>

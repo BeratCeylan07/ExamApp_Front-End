@@ -24,11 +24,11 @@ import {
   transition,
   trigger
 } from "./chunk-YY3WWBSM.js";
+import "./chunk-L5UVISHY.js";
 import {
   MatButtonModule,
   MatIconButton
 } from "./chunk-YCXZTFTE.js";
-import "./chunk-L5UVISHY.js";
 import {
   A11yModule,
   AriaDescriber,

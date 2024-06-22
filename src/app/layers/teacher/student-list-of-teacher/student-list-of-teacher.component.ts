@@ -7,24 +7,22 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { SubSink } from 'subsink';
 import { UserListModel } from '../../../Services/Models/StudentModels/StudentDataModel';
 import { AppExamApiService } from '../../../Services/exam-app-services/app-exam-api.service';
-import { RecordOfStudentComponent } from '../../student/record-of-student/record-of-student.component';
 import { ResultMessageBoxDialogComponent } from '../../result-message-box-dialog/result-message-box-dialog.component';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatIcon, MatIconModule } from '@angular/material/icon';
-import { MatProgressBar, MatProgressBarModule } from '@angular/material/progress-bar';
 import { DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ExamPipe } from '../../../exam.pipe';
 
 @Component({
-  selector: 'app-teacher-ders-tanim-list',
+  selector: 'app-student-list-of-teacher',
   standalone: true,
   imports: [
     MatIcon,
@@ -44,12 +42,12 @@ import { ExamPipe } from '../../../exam.pipe';
     MatMenuModule,
     FormsModule
   ],
-  templateUrl: './teacher-ders-tanim-list.component.html',
-  styleUrl: './teacher-ders-tanim-list.component.scss'
+  templateUrl: './student-list-of-teacher.component.html',
+  styleUrl: './student-list-of-teacher.component.scss'
 })
-export class TeacherDersTanimListComponent {
+export class StudentListOfTeacherComponent {
   @Input() teacherUID: string = '';
-  displayedColumns: string[] = ['tarih', 'baslangic', 'bitis', 'ders', 'action'];
+  displayedColumns: string[] = ['ad', 'soyad', 'ders', 'action'];
   dataSource = new MatTableDataSource<UserListModel>();
   private _subsink = new SubSink();
   progressBarMode: 'indeterminate' | 'determinate' = 'indeterminate';
@@ -71,11 +69,11 @@ export class TeacherDersTanimListComponent {
   constructor(public _dialog: MatDialog, private _cdr: ChangeDetectorRef, media: MediaMatcher, private _lessonAPIService: AppExamApiService) {  }
 
 
-  getTeacherDersTanimList(){
+  getStudentListOfTeacher(){
     this.progressBarMode = 'indeterminate';
     this.progressBarValue = 40;  // Change to desired value
 
-    this._lessonAPIService.get_teacher_session_setList(this.teacherUID).subscribe({
+    this._lessonAPIService.get_StudentList_Of_Teacher(this.teacherUID).subscribe({
       next: (result) => {
         this.dataSource.data = result;
         console.log(this.dataSource.data);
@@ -94,7 +92,7 @@ export class TeacherDersTanimListComponent {
   }
   
   ngOnInit(): void {
-    this.getTeacherDersTanimList();    
+    this.getStudentListOfTeacher();    
   }
 
   ngAfterViewInit() {

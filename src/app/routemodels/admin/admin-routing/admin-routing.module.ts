@@ -6,6 +6,7 @@ import { DashboardComponent } from '../../../layers/dashboard/dashboard.componen
 import { StudentComponent } from '../../../layers/student/student.component';
 import { ExamComponent } from '../../../layers/exam/exam.component';
 import { TeacherComponent } from '../../../layers/teacher/teacher.component';
+import { LessonComponent } from '../../../layers/lesson/lesson.component';
 
 
 const routes: Routes = [
@@ -15,6 +16,8 @@ const routes: Routes = [
     { path:'student', component: StudentComponent },
     { path:'exam', component: ExamComponent },
     { path:'teacher', component: TeacherComponent },
+    { path:'lessons', component: LessonComponent },
+
   ]}
 ];
 

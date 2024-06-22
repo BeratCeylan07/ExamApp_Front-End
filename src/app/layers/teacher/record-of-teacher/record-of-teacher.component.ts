@@ -21,6 +21,7 @@ import { AppExamApiService } from '../../../Services/exam-app-services/app-exam-
 import { RecordOfStudentComponent } from '../../student/record-of-student/record-of-student.component';
 import { MatSelectModule } from '@angular/material/select';
 import { TeacherDersTanimListComponent } from "../teacher-ders-tanim-list/teacher-ders-tanim-list.component";
+import { StudentListOfTeacherComponent } from "../student-list-of-teacher/student-list-of-teacher.component";
 
 @Component({
     selector: 'app-record-of-teacher',
@@ -46,7 +47,8 @@ import { TeacherDersTanimListComponent } from "../teacher-ders-tanim-list/teache
         MatListModule,
         ExamUserWpLogsComponent,
         LogListComponent,
-        TeacherDersTanimListComponent
+        TeacherDersTanimListComponent,
+        StudentListOfTeacherComponent
     ]
 })
 export class RecordOfTeacherComponent {
