@@ -18,7 +18,7 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header>
           Oturum Sayısı
         </th>
-        <td mat-cell *matCellDef="let row">{{ row.dersOturumSets.length }}</td>
+        <td mat-cell *matCellDef="let row">{{ row.dersOturumSets.length | number:'1.2-2' }}</td>
       </ng-container>
       <ng-container matColumnDef="toplamOgrenci">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>

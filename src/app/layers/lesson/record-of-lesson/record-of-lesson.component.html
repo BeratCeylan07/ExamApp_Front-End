@@ -31,6 +31,7 @@
                                 <mat-form-field>
                                     <mat-label>UID</mat-label>
                                     <input matInput formControlName="uid" [(ngModel)]="lessonInfo.uid" readonly="true" [disabled]="true"/>
+                                    
                                 </mat-form-field>
                             </div>
                             <div class="col-md-12">
@@ -114,7 +115,7 @@
                                                         <div class="card text-bg-primary w-100">
                                                             <div class="card-header">Toplam Oturum</div>
                                                             <div class="card-body">
-                                                                <h5 class="card-title">{{ 0 | number:'1.2-2' }}
+                                                                <h5 class="card-title">{{ lessonSums.toplamOturum | number:'1.2-2' }}
                                                                 </h5>
                                                             </div>
                                                         </div>
@@ -123,40 +124,15 @@
                                                         <div class="card text-bg-info w-100">
                                                             <div class="card-header">Kayıtlı Öğrenci Toplamı</div>
                                                             <div class="card-body">
-                                                                <h5 class="card-title">{{ 0 | number:'1.2-2'  }}</h5>
+                                                                <h5 class="card-title">{{ lessonSums.toplamOgrenci | number:'1.2-2'  }}</h5>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4 col-sm-6 mt-1">
                                                         <div class="card text-bg-warning w-100">
-                                                            <div class="card-header">Toplam Kitapçık</div>
+                                                            <div class="card-header">Toplam Öğretmen</div>
                                                             <div class="card-body">
-                                                                <h5 class="card-title">{{ 0 | number:'1.2-2' }}</h5>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4 col-sm-6 mt-1">
-                                                        <div class="card text-bg-danger w-100">
-                                                            <div class="card-header">Güncel Ciro</div>
-                                                            <div class="card-body">
-                                                                <h5 class="card-title">{{ 0 | number:'1.2-2'  }}
-                                                                </h5>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4 col-sm-6 mt-1">
-                                                        <div class="card text-bg-success w-100">
-                                                            <div class="card-header">Toplam Mâliyet</div>
-                                                            <div class="card-body">
-                                                                <h5 class="card-title">{{ 0 | number:'1.2-2' }}</h5>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4 col-sm-6 mt-1">
-                                                        <div class="card text-bg-dark w-100">
-                                                            <div class="card-header">Net Kâr</div>
-                                                            <div class="card-body">
-                                                                <h5 class="card-title">{{ 0 | number:'1.2-2' }}</h5>
+                                                                <h5 class="card-title">{{ lessonSums.toplamOgretmen | number:'1.2-2' }}</h5>
                                                             </div>
                                                         </div>
                                                     </div>

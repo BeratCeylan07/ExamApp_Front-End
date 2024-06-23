@@ -18,11 +18,13 @@ import { ResultMessageBoxDialogComponent } from '../../result-message-box-dialog
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { RecordOfLessonComponent } from '../record-of-lesson/record-of-lesson.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-lesson-list',
   standalone: true,
   imports: [
+    CommonModule,
     MatIcon,
     MatListModule,
     MatToolbarModule,
@@ -71,7 +73,7 @@ export class LessonListComponent {
           this.dataSource.data = result;
           this.progressBarMode = 'determinate';
           this.progressBarValue = 100;
-          console.log(result);
+          console.log(this.dataSource.data);
       },
       error: (error) => {
           this._dialog.open(ResultMessageBoxDialogComponent,{
@@ -92,12 +94,11 @@ export class LessonListComponent {
   lessonRecord(lessonUID: string): void{
     this._dialog.open(RecordOfLessonComponent,{
       data:lessonUID,
-      disableClose:true,
-      autoFocus:true,
       width:"auto",
       height:"auto",
       maxWidth:"100%",
-      maxHeight:"95%"
+      maxHeight:"95%",
+      panelClass: 'custom-dialog-container-1'
     });
   }
   ngAfterViewInit() {

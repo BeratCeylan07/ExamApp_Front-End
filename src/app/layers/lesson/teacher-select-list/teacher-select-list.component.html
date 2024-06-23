@@ -1,0 +1,5 @@
+  <mat-selection-list #shoes [multiple]="false">
+    @for (teacher of teachers; track $index) {
+      <mat-list-option [value]="teacher.uid" (selectedChange)="pushTeacher(teacher)">{{teacher.ad}} {{teacher.soyad}}</mat-list-option>
+    }
+  </mat-selection-list>

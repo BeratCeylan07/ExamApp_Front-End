@@ -23,6 +23,7 @@ import { ExamSessionStudentListComponent } from '../../exam/exam-session-student
 import { ResultMessageBoxDialogComponent } from '../../result-message-box-dialog/result-message-box-dialog.component';
 import { SessionListOfLessonComponent } from "../session-list-of-lesson/session-list-of-lesson.component";
 import { StudentListOfLessonComponent } from "../student-list-of-lesson/student-list-of-lesson.component";
+import { TeacherSelectListComponent } from "../teacher-select-list/teacher-select-list.component";
 
 @Component({
     selector: 'app-record-of-lesson',
@@ -49,7 +50,8 @@ import { StudentListOfLessonComponent } from "../student-list-of-lesson/student-
         MatCheckboxModule,
         MatListModule,
         SessionListOfLessonComponent,
-        StudentListOfLessonComponent
+        StudentListOfLessonComponent,
+        TeacherSelectListComponent
     ]
 })
 export class RecordOfLessonComponent {
@@ -88,9 +90,9 @@ export class RecordOfLessonComponent {
   
   ngOnInit(): void {
     this.getLessonDetail();
+    this.getLessonSums();
     setTimeout(() => {
       this._isLoading = false;
-
     }, 1500);
   }
   getLessonDetail(): void{
@@ -110,6 +112,33 @@ export class RecordOfLessonComponent {
 
         }
       })
+  }
+  getLessonSums(): void{
+    this._subSink.sink = this._lessonAPIService.get_lessonSums(this.lessonUID).subscribe({
+      next: (result) => {
+          this.lessonSums = result;
+      },
+      error: (error) => {
+          this.dialog.open(ResultMessageBoxDialogComponent,{
+            data:{
+              title: "Hata Oluştu",
+              message: error.message
+            }
+          });
+      },
+      complete: () => {
+
+      }
+    })
+    
+  }
+  openTeacherListDialog(): void{
+    this.dialog.open(TeacherSelectListComponent,{
+      width:"auto",
+      height:"auto",
+      autoFocus:true,
+      disableClose:true
+    });
   }
   dialogClose(): void{
     this.dialogRef.close();

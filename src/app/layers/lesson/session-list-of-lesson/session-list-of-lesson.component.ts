@@ -1,6 +1,6 @@
 import { MediaMatcher } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, ChangeDetectorRef, Component, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Input, NgZone, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -18,6 +18,8 @@ import { AppExamApiService } from '../../../Services/exam-app-services/app-exam-
 import { ExamRecordDialogComponent } from '../../exam/exam-record-dialog/exam-record-dialog.component';
 import { ResultMessageBoxDialogComponent } from '../../result-message-box-dialog/result-message-box-dialog.component';
 import { RecordOfLessonComponent } from '../record-of-lesson/record-of-lesson.component';
+import { RecordOfLessonSesionComponent } from '../record-of-lesson-sesion/record-of-lesson-sesion.component';
+import { DataChangeModel } from '../../../Services/Models/LessonModels/record-data-change.model';
 
 @Component({
   selector: 'app-session-list-of-lesson',
@@ -36,11 +38,12 @@ import { RecordOfLessonComponent } from '../record-of-lesson/record-of-lesson.co
     MatSortModule,
     MatPaginatorModule,
     MatPaginator,
-    MatProgressBarModule
+    MatProgressBarModule,
   ],
   templateUrl: './session-list-of-lesson.component.html',
   styleUrl: './session-list-of-lesson.component.scss'
 })
+
 export class SessionListOfLessonComponent implements AfterViewInit {
   @Input() lessonUID: string = '';
   displayedColumns: string[] = [
@@ -65,9 +68,14 @@ export class SessionListOfLessonComponent implements AfterViewInit {
     media: MediaMatcher,
     private _examAPIService: AppExamApiService,
     public dialog: MatDialog,
-    private _lessonRecord: RecordOfLessonComponent
+    private _lessonRecord: RecordOfLessonComponent,
+    private ngZone: NgZone,
+    
   ) {}
-
+  changeDataModel: DataChangeModel = {
+    lessonSessionUID: '',
+    teacherModel: []
+  }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -87,7 +95,7 @@ export class SessionListOfLessonComponent implements AfterViewInit {
       .subscribe({
         next: (result) => {
           this.dataSource.data = result;
-          console.log(result);
+          console.log("ders oturumlar: ",result);
         },
         error: (error) => {
           this.dialog.open(ResultMessageBoxDialogComponent, {
@@ -102,6 +110,16 @@ export class SessionListOfLessonComponent implements AfterViewInit {
           this.progressBarValue = 100;
         },
       });
+  }
+  getSessionRecord(lessonSessionUID: string){
+      this.changeDataModel.lessonSessionUID = lessonSessionUID
+
+      this.dialog.open(RecordOfLessonSesionComponent,{
+        data:this.changeDataModel,
+        autoFocus:true,
+        disableClose:true
+      });
+
   }
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;

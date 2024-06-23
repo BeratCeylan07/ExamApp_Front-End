@@ -1,6 +1,11 @@
+@use '@angular/material' as mat;
+
 mat-card{
     height:100% !important;
     max-height: 100% !important;
+}
+.recordCard{
+  height: auto !important;
 }
 button{
     height: 60px;
@@ -37,13 +42,37 @@ section {
     width: 120px;
   }
   @media screen and (max-width: 768px) {
+    button{
+        max-width: 100% !important;
+        width: 100% !important;
+        margin:0px !important;
+        margin-top: 1px !important;
+    }
     section{
         padding:0px !important;
         margin:0px !important;
     }
   }
+
+  .example-card {
+    max-width: 100% !important;
+  }
+
+  .text-title-color{
+    color: #3f51b5;
+  }
+
+  .pl-0{
+    padding-left: 0px !important;
+  }
+
+  .pr-0{
+    padding-right: 0px !important;
+  }
+
+
   .spinner-overlay {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -58,4 +87,18 @@ section {
   .blur {
     filter: blur(5px);
     pointer-events: none;
+  }
+
+  .example-h2 {
+    margin: 10px;
+  }
+  
+  .example-section {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    height: 60px;
+  }
+  .example-margin {
+    margin: 10px;
   }

@@ -17,6 +17,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { LessonRecordInStudentListModel } from '../../../Services/Models/LessonModels/Lesson_Record_In_Student_List_Model';
 
 @Component({
   selector: 'app-student-list-of-lesson',
@@ -47,7 +48,7 @@ export class StudentListOfLessonComponent implements AfterViewInit {
     'oturum',
     'kayitTarih',
   ];
-  dataSource = new MatTableDataSource<any>(); // Initialize the dataSource
+  dataSource = new MatTableDataSource<LessonRecordInStudentListModel>(); // Initialize the dataSource
   private _subSink = new SubSink();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -63,26 +64,17 @@ export class StudentListOfLessonComponent implements AfterViewInit {
     private _lessonRecord: RecordOfLessonComponent
   ) {}
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
   ngOnInit(): void {
-    this.getSessionList();
+    this.getStudentList();
   }
-  getSessionList(): void {
+  getStudentList(): void {
     this.progressBarMode = 'indeterminate';
     this.progressBarValue = 100;
     this._subSink.sink = this._examAPIService
-      .get_lesson_session_list(this.lessonUID)
+      .get_lesson_student_list(this.lessonUID)
       .subscribe({
         next: (result) => {
           this.dataSource.data = result;
-          console.log(result);
         },
         error: (error) => {
           this.dialog.open(ResultMessageBoxDialogComponent, {
@@ -97,6 +89,15 @@ export class StudentListOfLessonComponent implements AfterViewInit {
           this.progressBarValue = 100;
         },
       });
+  }
+  
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;

@@ -75,7 +75,7 @@ export class ExamSessionRecordDialogComponent {
     isCreatedDate: new Date(),
     isModifiedDate: new Date(),
     sessionBilgi: ''
-  } ;
+  };
   constructor(
     public dialogRef: MatDialogRef<ExamSessionRecordModel>,
     @Inject(MAT_DIALOG_DATA) public examSessionUID: string,

@@ -20,6 +20,7 @@ import { ExamListComponent } from '../exam/exam-list/exam-list.component';
 import { SubSink } from 'subsink';
 import { LessonListComponent } from "./lesson-list/lesson-list.component";
 import { NewLessonComponent } from './new-lesson/new-lesson.component';
+import { LessonDashboardChartComponent } from "./lesson-dashboard-chart/lesson-dashboard-chart.component";
 
 @Component({
     selector: 'app-lesson',
@@ -45,7 +46,8 @@ import { NewLessonComponent } from './new-lesson/new-lesson.component';
         ExamCurrentOccupancyRatesComponent,
         ExamDailyOccupancyRatesComponent,
         MatProgressSpinnerModule,
-        LessonListComponent
+        LessonListComponent,
+        LessonDashboardChartComponent
     ]
 })
 export class LessonComponent {
