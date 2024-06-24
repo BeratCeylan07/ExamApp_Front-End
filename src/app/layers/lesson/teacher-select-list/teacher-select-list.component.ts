@@ -48,7 +48,11 @@ export class TeacherSelectListComponent {
   pushTeacher(teacher: any){
     this.returnData.teacherModel = teacher;
      this.dialog.open(RecordOfLessonSesionComponent,{
-      data:this.returnData
+      data:this.returnData,
+      autoFocus:true,
+      disableClose:true,
+      width:"auto",
+      height:"auto"
     });
     this.dialogRef.close();
   }

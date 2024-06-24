@@ -77,7 +77,7 @@ export class TeacherDersTanimListComponent {
 
     this._lessonAPIService.get_teacher_session_setList(this.teacherUID).subscribe({
       next: (result) => {
-        this.dataSource.data = result;
+        this.dataSource.data = result.$values;
         console.log(this.dataSource.data);
         this.progressBarMode = 'determinate';
         this.progressBarValue = 100;  // Change to desired value

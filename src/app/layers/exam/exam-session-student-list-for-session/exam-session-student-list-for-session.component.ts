@@ -80,7 +80,7 @@ export class ExamSessionStudentListForSessionComponent {
     this.progressBarValue = 30;
      this._subSink.sink = this._apiService.get_StudentListForSession(this.sessionUID).subscribe({
       next: (result) => {
-        this.dataSource.data = result;
+        this.dataSource.data = result.$values;
         this.progressBarMode = 'determinate';
         this.progressBarValue = 100;
         console.log(this.dataSource.data);

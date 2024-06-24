@@ -1,244 +1,227 @@
-
 @if(_isLoading){
-    <div class="spinner-overlay">
-        <mat-spinner></mat-spinner>
-    </div>
-    }
+<div class="spinner-overlay">
+  <mat-spinner></mat-spinner>
+</div>
+}
 <div class="container-fluid p-0 m-0">
-    
-    <div class="row p-0 m-0">
-        <div class="col-md-12 p-2 m-0" style="padding-left: 1.5rem !important; padding-right: 1.5rem !important">
-            <mat-card-title>
-                <h4 class="text-title-color" style="float: left !important">
-                    Oturum Bilgi Kartı
-                </h4>
-            </mat-card-title>
-            <button mat-icon-button color="warn" style="float: right !important" (click)="MatDialogClose()">
-                <mat-icon>close</mat-icon>
-            </button>
-            <button mat-icon-button color="primary" style="float: right !important; margin-right: 10px;"
-                (click)="sessionRecordReload()">
-                <mat-icon>refresh</mat-icon>
-            </button>   
-            <button mat-icon-button color="primary"  style="float: right !important; margin-right: 10px;" (click)="sessionInfoUpdate()"><mat-icon>done_outline</mat-icon></button>
-        </div>
+  <div class="row p-0 m-0">
+    <div
+      class="col-md-12 p-2 m-0"
+      style="padding-left: 1.5rem !important; padding-right: 1.5rem !important"
+    >
+      <mat-card-title>
+        <h4 class="text-title-color" style="float: left !important">
+          Oturum Bilgi Kartı
+        </h4>
+      </mat-card-title>
+      <button
+        mat-icon-button
+        color="warn"
+        style="float: right !important"
+        (click)="MatDialogClose()"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        color="primary"
+        style="float: right !important; margin-right: 10px"
+        (click)="sessionRecordReload()"
+      >
+        <mat-icon>refresh</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        color="primary"
+        style="float: right !important; margin-right: 10px"
+        (click)="sessionInfoUpdate()"
+      >
+        <mat-icon>done_outline</mat-icon>
+      </button>
     </div>
-    <div class="row p-0 m-0">
-        <div class="col-md-4 col-sm-12 p-4 m-0 pr-0">
-            <mat-card class="example-card">
-  
-                <mat-card-content>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <mat-form-field class="example-form-field">
-                                <mat-label>UID</mat-label>
-                                <input matInput [(ngModel)]="lessonSessionInfo.uid" />
-                            </mat-form-field>
-                        </div>
-                        <div class="col-md-12">
-                            <mat-form-field class="example-form-field">
-                                <mat-label>Clearable input</mat-label>
-                                <input matInput type="text" [value]="lessonSessionInfo.teacher?.ad + ' ' + lessonSessionInfo.teacher?.soyad" [disabled]="true">
-                                  <button matSuffix mat-icon-button (click)="openTeacherListDialog()">
-                                    <mat-icon>more_horiz</mat-icon>
-                                  </button>
-                              </mat-form-field>
-    
-                        </div>
-                        <div class="col-md-12">
-                            <mat-form-field>
-                                <mat-label>Ders Tarihi</mat-label>
-                                <input type="datetime-local" matInput [(ngModel)]="lessonSessionInfo.tarih" />
-                            </mat-form-field>
-                        </div>
-                        <div class="col-md-12">
-                            <mat-form-field>
-                                <mat-label>Başlangıç Saati</mat-label>
-                                <input type="datetime-local" matInput [(ngModel)]="lessonSessionInfo.baslangic" />
-                            </mat-form-field>
-                        </div>
-                        <div class="col-md-6">
-                            <mat-form-field>
-                                <mat-label>Bitiş Saati</mat-label>
-                                <input type="datetime-local" matInput [(ngModel)]="lessonSessionInfo.bitis" />
-                            </mat-form-field>
-                        </div>
-                        <div class="col-md-6">
-                            <section class="example-section">
-                                <mat-slide-toggle class="example-margin" color="primary" [checked]="lessonSessionInfo.isActive">
-                                    @if(lessonSessionInfo.isActive == true){
-                                    <strong>Aktif Ders Oturumu</strong> }@else{
-                                    <strong>Ders Oturumu Kapalı</strong> }
-                                </mat-slide-toggle>
-                            </section>
-                        </div>
-                     
-             
-                        <mat-list role="list">
-                            <div class="row">
+  </div>
+  <div class="row p-0 m-0">
+    <div class="col-md-4 col-sm-12 p-4 m-0 pr-0">
+      <mat-card class="example-card">
+        <mat-card-content>
+          <div class="row">
+            <div class="col-md-12">
+              <mat-form-field class="example-form-field">
+                <mat-label>UID</mat-label>
+                <input matInput [(ngModel)]="lessonSessionInfo.uid" />
+              </mat-form-field>
+            </div>
+            <div class="col-md-12">
+              <mat-form-field class="example-form-field">
+                <mat-label>Öğretmen</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  [(ngModel)]="teacherNameSurname"
+                  [disabled]="true"
+                />
+                <button
+                  matSuffix
+                  mat-icon-button
+                  (click)="openTeacherListDialog()">
+                  <mat-icon>more_horiz</mat-icon>
+                </button>
+              </mat-form-field>
+            </div>
+            <div class="col-md-12">
+              <mat-form-field>
+                <mat-label>Ders Tarihi</mat-label>
+                <input
+                  type="datetime-local"
+                  matInput
+                  [(ngModel)]="lessonSessionInfo.tarih"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-md-12">
+              <mat-form-field>
+                <mat-label>Başlangıç Saati</mat-label>
+                <input
+                  type="datetime-local"
+                  matInput
+                  [(ngModel)]="lessonSessionInfo.baslangic"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field>
+                <mat-label>Bitiş Saati</mat-label>
+                <input
+                  type="datetime-local"
+                  matInput
+                  [(ngModel)]="lessonSessionInfo.bitis"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <section class="example-section">
+                <mat-slide-toggle
+                  class="example-margin"
+                  color="primary"
+                  [checked]="lessonSessionInfo.isActive"
+                >
+                  @if(lessonSessionInfo.isActive == true){
+                  <strong>Aktif Ders Oturumu</strong> }@else{
+                  <strong>Ders Oturumu Kapalı</strong> }
+                </mat-slide-toggle>
+              </section>
+            </div>
 
-                                <div class="col-6">
-                                    <mat-list-item>
-                                        <mat-icon matListItemIcon>person_add</mat-icon>
-                                        <div matListItemTitle>Oluşturan</div>
-                                        <div matListItemLine>{{ lessonSessionInfo.isCreatedUser?.kullaniciAdi }}</div>
-                                      </mat-list-item>
-                                </div>
-                                        <div class="col-6">
-                                    <mat-list-item>
-                                        <mat-icon matListItemIcon>calendar_month</mat-icon>
-                                        <div matListItemTitle>Oluşturma Tarihi</div>
-                                        <div matListItemLine>{{ lessonSessionInfo.isCreatedDate | date: 'dd.MM.yyyy - HH:mm' }}</div>
-                                      </mat-list-item>
-                                </div>
-                                <div class="col-6">
-                                    <mat-list-item>
-                                        <mat-icon matListItemIcon>manage_accounts</mat-icon>
-                                        <div matListItemTitle>Güncelleyen</div>
-                                        <div matListItemLine>{{ lessonSessionInfo.isModifiedUser?.kullaniciAdi }}</div>
-                                      </mat-list-item>
-                                </div>    
-                                <div class="col-6">
-                                    <mat-list-item>
-                                        <mat-icon matListItemIcon>calendar_month</mat-icon>
-                                        <div matListItemTitle>Güncelleme Tarihi</div>
-                                        <div matListItemLine>{{ lessonSessionInfo.isModifiedDate | date: 'dd.MM.yyyy : HH:mm' }}</div>
-                                      </mat-list-item>
-                                </div>
-
-                            </div>
-                                                        
-                          </mat-list>
+            <mat-list role="list">
+              <div class="row">
+                <div class="col-6">
+                  <mat-list-item>
+                    <mat-icon matListItemIcon>person_add</mat-icon>
+                    <div matListItemTitle>Oluşturan</div>
+                    <div matListItemLine>
+                      {{ lessonSessionInfo.isCreatedUser?.kullaniciAdi }}
                     </div>
-                </mat-card-content>
-            </mat-card>
-        </div>
-        <div class="col-md-8 col-sm-12 p-4 m-0 pl-0">
-            <mat-card class="example-card">
-                <mat-card-content>
-                    <mat-tab-group>
-                        <mat-tab label="Tüm Sınav Bilgileri">
-                            <mat-card class="example-card">
-                                <mat-card-content>
-                                    <mat-card class="recordCard">
-                                        <mat-card-header>
-                                            <mat-card-title>Oturum Toplamları</mat-card-title>
-                                          </mat-card-header>
-                                        <mat-card-content>
-                                            <div class="row mt-2">
-                                                <div class="col-md-12 col-sm-6 mt-1">
-                                                    <div class="card text-bg-primary w-100">
-                                                        <div class="card-header">Toplam Kayıtlı Öğrenci</div>
-                                                        <div class="card-body">
-                                                            <h5 class="card-title">{{ 0 | number:'1.2-2'  }}</h5>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4 col-sm-6 mt-1">
-                                                    <div class="card text-bg-info w-100">
-                                                        <div class="card-header">Katılım Sağlayan</div>
-                                                        <div class="card-body">
-                                                            <h5 class="card-title">{{ 0 | number:'1.2-2'  }}</h5>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4 col-sm-6 mt-1">
-                                                    <div class="card text-bg-warning w-100">
-                                                        <div class="card-header">Kitapçık Alan</div>
-                                                        <div class="card-body">
-                                                            <h5 class="card-title">{{ 0 | number:'1.2-2'  }}</h5>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4 col-sm-6 mt-1">
-                                                    <div class="card text-bg-danger w-100">
-                                                        <div class="card-header">Devamsız</div>
-                                                        <div class="card-body">
-                                                            <h5 class="card-title">{{ 0 | number:'1.2-2'  }}</h5>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </mat-card-content>
-                                    </mat-card>
-                                </mat-card-content>
-                            </mat-card>
-                        </mat-tab>
-                        <mat-tab label="Öğrenci Kayıtları">
-                            <section>
-                                <div class="example-button-row">
-                                  <button mat-flat-button color="primary"><mat-icon>add</mat-icon>Yeni Oturum Oluştur</button>
-                                </div>
-                              </section>
-                              <mat-form-field>
-                                  <mat-label>Ara</mat-label>
-                                  <input matInput (keyup)="applyFilter($event)" placeholder="Oturum Bilgisi" #input>
-                                </mat-form-field>
-                                
-                                <div class="mat-elevation-z8">
-                                  <table mat-table [dataSource]="lessonSessionInStudent" matSort matPag>
-                                
-                              
-                                    <!-- Progress Column -->
-                              
-                                    <!-- Progress Column -->
-                                    <ng-container matColumnDef="tarih">
-                                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Ders Tarihi </th>
-                                      <td mat-cell *matCellDef="let row"> {{row.tarih | date: 'dd.MM.yyyy'}} </td>
-                                    </ng-container>
-                                          <!-- Name Column -->
-                                          <ng-container matColumnDef="teacher">
-                                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Öğretmen </th>
-                                            <td mat-cell *matCellDef="let row"> {{row.teacher.ad}} {{row.teacher.soyad}} </td>
-                                          </ng-container>
-                                            <!-- Name Column -->
-                                       <!-- Fruit Column -->
-                                       <ng-container matColumnDef="baslangic">
-                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Tarih </th>
-                                        <td mat-cell *matCellDef="let row"> {{row.baslangic | date: 'HH:mm'}} </td>
-                                      </ng-container>
-                                    <!-- Name Column -->
-                                    <ng-container matColumnDef="bitis">
-                                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Kontenjan </th>
-                                      <td mat-cell *matCellDef="let row"> {{row.bitis | date: 'HH:mm'}} </td>
-                                    </ng-container>
-                                      <!-- Name Column -->
-                                    <ng-container matColumnDef="toplamKayit">
-                                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Toplam Kayıt </th>
-                                      <td mat-cell *matCellDef="let row"> {{row.dersOturumUserSets.length}} </td>
-                                    </ng-container>
-                                      <!-- Name Column -->  
-                                              <!-- Name Column -->
-                                    <ng-container matColumnDef="durum">
-                                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Durum </th>
-                                      <td mat-cell *matCellDef="let row"> @if(row.isActive){ Aktif Ders }@else{ Ders İptal } </td>
-                                    </ng-container>
-                                      <!-- Name Column -->
-                                      <ng-container matColumnDef="action">
-                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Seçenekler </th>
-                                        <td mat-cell *matCellDef="let row"> 
-                                          <button mat-icon-button color="primary"><mat-icon>visibility</mat-icon></button>
-                                        </td>
-                                      </ng-container>
-                              
-                                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                                
-                                    <!-- Row shown when there is no matching data. -->
-                                    <tr class="mat-row" *matNoDataRow>
-                                      <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
-                                    </tr>
-                              
-                                  </table>
-                                  <mat-paginator [pageSizeOptions]="[10, 25, 100]" aria-label="Select page of users"></mat-paginator>
-                              
-                                </div>
-                                                      </mat-tab>
-                        <mat-tab label="Oturum Logları" [disabled]="false">
-                        </mat-tab>
-                    </mat-tab-group>
-                </mat-card-content>
-            </mat-card>
-        </div>
+                  </mat-list-item>
+                </div>
+                <div class="col-6">
+                  <mat-list-item>
+                    <mat-icon matListItemIcon>calendar_month</mat-icon>
+                    <div matListItemTitle>Oluşturma Tarihi</div>
+                    <div matListItemLine>
+                      {{
+                        lessonSessionInfo.isCreatedDate
+                          | date : "dd.MM.yyyy - HH:mm"
+                      }}
+                    </div>
+                  </mat-list-item>
+                </div>
+                <div class="col-6">
+                  <mat-list-item>
+                    <mat-icon matListItemIcon>manage_accounts</mat-icon>
+                    <div matListItemTitle>Güncelleyen</div>
+                    <div matListItemLine>
+                      {{ lessonSessionInfo.isModifiedUser?.kullaniciAdi }}
+                    </div>
+                  </mat-list-item>
+                </div>
+                <div class="col-6">
+                  <mat-list-item>
+                    <mat-icon matListItemIcon>calendar_month</mat-icon>
+                    <div matListItemTitle>Güncelleme Tarihi</div>
+                    <div matListItemLine>
+                      {{
+                        lessonSessionInfo.isModifiedDate
+                          | date : "dd.MM.yyyy : HH:mm"
+                      }}
+                    </div>
+                  </mat-list-item>
+                </div>
+              </div>
+            </mat-list>
+          </div>
+        </mat-card-content>
+      </mat-card>
     </div>
+    <div class="col-md-8 col-sm-12 p-4 m-0 pl-0">
+      <mat-card class="example-card">
+        <mat-card-content>
+          <mat-tab-group>
+            <mat-tab label="Tüm Sınav Bilgileri">
+              <mat-card class="example-card">
+                <mat-card-content>
+                  <mat-card class="recordCard">
+                    <mat-card-header>
+                      <mat-card-title>Oturum Toplamları</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                      <div class="row mt-2">
+                        <div class="col-md-12 col-sm-6 mt-1">
+                          <div class="card text-bg-primary w-100">
+                            <div class="card-header">
+                              Toplam Kayıtlı Öğrenci
+                            </div>
+                            <div class="card-body">
+                              <h5 class="card-title">
+                                {{ 0 | number : "1.2-2" }}
+                              </h5>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12 mt-1">
+                          <div class="card text-bg-info w-100">
+                            <div class="card-header">Katılım Sağlayan</div>
+                            <div class="card-body">
+                              <h5 class="card-title">
+                                {{ 0 | number : "1.2-2" }}
+                              </h5>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12 mt-1">
+                          <div class="card text-bg-danger w-100">
+                            <div class="card-header">Devamsız</div>
+                            <div class="card-body">
+                              <h5 class="card-title">
+                                {{ 0 | number : "1.2-2" }}
+                              </h5>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </mat-card-content>
+                  </mat-card>
+                </mat-card-content>
+              </mat-card>
+            </mat-tab>
+            <mat-tab label="Öğrenci Kayıtları">
+              @if(!wait){
+                <app-student-list-of-lesson-session [lessonSessionUID]="lessonSessionInfo.uid"></app-student-list-of-lesson-session>
+              }
+            </mat-tab>
+            <mat-tab label="Oturum Logları" [disabled]="false"> </mat-tab>
+          </mat-tab-group>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
 </div>

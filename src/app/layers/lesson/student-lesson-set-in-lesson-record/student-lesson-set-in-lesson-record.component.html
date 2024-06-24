@@ -1,0 +1,51 @@
+<h2 mat-dialog-title class="text-center">
+    <mat-icon>person</mat-icon> <br />
+    Ders Öğrenci Kayıt Kartı
+  </h2>
+  <mat-dialog-content>
+    <div class="row">
+      <form class="example-form" [formGroup]="newLessonSessionFormGroup">
+        <div class="col-12">
+          <mat-form-field class="example-full-width">
+            <mat-label>Oturum</mat-label>
+            <mat-select formControlName="lessonSessionUID">
+                @for (session of sessions; track $index) {
+                  <mat-option [value]="session.uid">Öğretmen: {{ session.teacher.ad }} {{ session.teacher.soyad }} - Tarih: {{ session.tarih | date: 'dd.MM.yyyy' }} {{ session.baslangic | date: 'HH:mm' }} / {{ session.bitis | date: 'HH:mm' }}</mat-option>
+                }
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-12">
+            <mat-form-field class="example-full-width">
+              <mat-label>Öğrenci</mat-label>
+              <mat-select formControlName="studentUID">
+                  @for (student of students; track $index) {
+                    <mat-option [value]="student.userUID">{{student.name}} {{student.surname}}</mat-option>
+                  }
+              </mat-select>
+            </mat-form-field>
+          </div>
+        <div class="col-12">
+            <mat-form-field class="example-full-width">
+              <mat-label>Bilgi</mat-label>
+              <input matInput type="text" placeholder="Bilgi" formControlName="bilgi" name="bilgi" />
+            </mat-form-field>
+          </div>
+      </form>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-6">
+          <button mat-flat-button color="warn" class="w-100" mat-dialog-close>İptal</button>
+        </div>
+        <div class="col-6">
+          <button mat-flat-button color="primary" class="w-100" cdkFocusInitial (click)="studentSessionSet()" [disabled]="newLessonSessionFormGroup.invalid">Kaydet</button>
+        </div>
+      </div>
+    </div>
+  </mat-dialog-actions>
+  <mat-progress-bar [mode]="progressBarMode" [value]="progressBarValue"></mat-progress-bar>
+
+  

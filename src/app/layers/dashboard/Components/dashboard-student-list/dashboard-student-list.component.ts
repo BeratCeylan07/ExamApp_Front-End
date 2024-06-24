@@ -52,7 +52,7 @@ export class DashboardStudentListComponent implements AfterViewInit {
   
   ngOnInit(): void {
     this.dashboardApiService.get_UserListOfExam_For_Dashboard().subscribe((result) => {
-      this.dataSource.data = result;
+      this.dataSource.data = result.$values;
       this.progressBarMode = 'determinate';
       this.progressBarValue = 100;  // Change to desired value
     }, 

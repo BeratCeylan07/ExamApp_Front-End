@@ -24,7 +24,7 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header>
           Kayıtlı Öğrenci
         </th>
-        <td mat-cell *matCellDef="let row">{{ row.userDersSets.length }}</td>
+        <td mat-cell *matCellDef="let row">{{ row.toplamKayitliOgrenci | number:'1.2-2' }}</td>
       </ng-container>
       <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>

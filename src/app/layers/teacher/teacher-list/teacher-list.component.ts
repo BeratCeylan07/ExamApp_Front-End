@@ -77,7 +77,7 @@ export class TeacherListComponent {
     this.progressBarMode = 'indeterminate';
     this.progressBarValue = 40;  // Change to desired value
      this._subsink.sink = this._studentApiservice.get_TeacherList().subscribe((result) => {
-      this.dataSource.data = result;
+      this.dataSource.data = result.$values;
      console.log(result);
       this.progressBarMode = 'determinate';
       this.progressBarValue = 100;  // Change to desired value

@@ -1,8 +1,4 @@
-<section>
-    <div class="example-button-row">
-      <button mat-flat-button color="primary"><mat-icon>add</mat-icon>Öğrenci Tanımla</button>
-    </div>
-  </section>
+
   <mat-form-field>
       <mat-label>Ara</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="Oturum Bilgisi" #input>
@@ -21,7 +17,7 @@
         </ng-container>
         <ng-container matColumnDef="oturum">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Ders Tarihi </th>
-          <td mat-cell *matCellDef="let row"> {{row.oturum.tarih | date: 'dd.MM.yyyy'}} / {{row.oturum.baslangic | date: 'dd.MM.yyyy'}} - {{row.oturum.bitis | date: 'dd.MM.yyyy'}} </td>
+          <td mat-cell *matCellDef="let row"> {{row.oturum.tarih | date: 'dd.MM.yyyy'}} / {{row.oturum.baslangic | date: 'HH:mm'}} - {{row.oturum.bitis | date: 'HH:mm'}} </td>
         </ng-container>
         <ng-container matColumnDef="kayitTarih">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Ders Tarihi </th>

@@ -77,7 +77,7 @@ export class StudentListComponent implements AfterViewInit {
     this.progressBarMode = 'indeterminate';
     this.progressBarValue = 40;  // Change to desired value
     this._studentApiservice.get_UserList_For_UserLayer().subscribe((result) => {
-      this.dataSource.data = result;
+      this.dataSource.data = result.$values;
      
       this.progressBarMode = 'determinate';
       this.progressBarValue = 100;  // Change to desired value

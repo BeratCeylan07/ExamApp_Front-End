@@ -54,7 +54,7 @@ export class DashboardExamListComponent implements AfterViewInit {
   ngOnInit(): void {
     this.dashboardApiService.get_ExamList_For_Dashboard().subscribe((result) => {
       console.log(result);
-      this.dataSource.data = result;
+      this.dataSource.data = result.$values;
       console.log(this.dataSource.data);
       this.progressBarMode = 'determinate';
       this.progressBarValue = 100;  // Change to desired value

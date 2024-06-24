@@ -1,5 +1,6 @@
+import { SessionListOfLessonComponent } from './../session-list-of-lesson/session-list-of-lesson.component';
 import { CommonModule } from '@angular/common';
-import { Component, Inject, ViewChild } from '@angular/core';
+import { Component, Inject, ViewChild, viewChild } from '@angular/core';
 import { ReactiveFormsModule, FormsModule, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -21,9 +22,10 @@ import { ExamRecordDialogComponent } from '../../exam/exam-record-dialog/exam-re
 import { ExamSessionListComponent } from '../../exam/exam-session-list/exam-session-list.component';
 import { ExamSessionStudentListComponent } from '../../exam/exam-session-student-list/exam-session-student-list.component';
 import { ResultMessageBoxDialogComponent } from '../../result-message-box-dialog/result-message-box-dialog.component';
-import { SessionListOfLessonComponent } from "../session-list-of-lesson/session-list-of-lesson.component";
 import { StudentListOfLessonComponent } from "../student-list-of-lesson/student-list-of-lesson.component";
 import { TeacherSelectListComponent } from "../teacher-select-list/teacher-select-list.component";
+import { NewLessonSessionRecordComponent } from '../new-lesson-session-record/new-lesson-session-record.component';
+import { StudentLessonSetInLessonRecordComponent } from '../student-lesson-set-in-lesson-record/student-lesson-set-in-lesson-record.component';
 
 @Component({
     selector: 'app-record-of-lesson',
@@ -66,10 +68,9 @@ export class RecordOfLessonComponent {
     private _lessonAPIService : AppExamApiService,
     public dialog: MatDialog
   ) {}
-  @ViewChild(ExamSessionStudentListComponent)
-  childComponent!: ExamSessionStudentListComponent;
-  @ViewChild(ExamSessionListComponent)
-  childComponentSession!: ExamSessionListComponent;
+  @ViewChild(SessionListOfLessonComponent) sesionList!: SessionListOfLessonComponent;
+  @ViewChild(StudentListOfLessonComponent) studentList!: StudentListOfLessonComponent;
+
   examSums: any = {
     toplamOturum: 0,
     toplamKayitliOgrenci: 0,
@@ -95,6 +96,30 @@ export class RecordOfLessonComponent {
       this._isLoading = false;
     }, 1500);
   }
+  newLessonSessionDialogOpen(): void{
+    this._subSink.sink = this.dialog.open(NewLessonSessionRecordComponent,{
+      data:this.lessonUID,
+      width:"500px",
+      height:"auto",
+      disableClose:true,
+      autoFocus:true
+    }).afterClosed().subscribe((result) => {
+      if(result)
+        this.getLessonDetail();
+    });
+  }
+  newLessonSessionStudentSetDialog(): void{
+    this._subSink.sink = this.dialog.open(StudentLessonSetInLessonRecordComponent,{
+      data:this.lessonUID,
+      width:"700px",
+      height:"auto",
+      disableClose:true,
+      autoFocus:true
+    }).afterClosed().subscribe((result) => {
+      if(result)
+        this.getLessonDetail();
+    });
+  }
   getLessonDetail(): void{
       this._subSink.sink = this._lessonAPIService.get_lesson_detail(this.lessonUID).subscribe({
         next: (result) => {
@@ -109,7 +134,8 @@ export class RecordOfLessonComponent {
             });
         },
         complete: () => {
-
+            this.sesionList.getSessionList();
+            this.studentList.getStudentList();
         }
       })
   }
@@ -142,5 +168,8 @@ export class RecordOfLessonComponent {
   }
   dialogClose(): void{
     this.dialogRef.close();
+  }
+  ngOnDestroy(): void {
+    this._subSink.unsubscribe();
   }
 }

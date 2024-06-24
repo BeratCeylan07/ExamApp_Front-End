@@ -75,7 +75,7 @@ export class StudentListOfTeacherComponent {
 
     this._lessonAPIService.get_StudentList_Of_Teacher(this.teacherUID).subscribe({
       next: (result) => {
-        this.dataSource.data = result;
+        this.dataSource.data = result.$values;
         console.log(this.dataSource.data);
         this.progressBarMode = 'determinate';
         this.progressBarValue = 100;  // Change to desired value

@@ -52,7 +52,7 @@ export class StudentExamNetChartComponent {
     this._subSink.sink = this._studentApiservice.get_examScoreOfStudent(this.studentUID).subscribe({
       next: (result) => {
 
-          const _dataPoints = result.map((x: { label: string; yNet: number; }) => ({
+          const _dataPoints = result.$values.map((x: { label: string; yNet: number; }) => ({
             label:x.label,
             y:x.yNet
           }));

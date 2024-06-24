@@ -69,14 +69,13 @@ export class ExamListComponent implements AfterViewInit  {
   }
 
   getExamList() {
-    this._subSink.sink = this.examAPIService.get_ExamList_For_ExamComp().subscribe((result) => {
-      this.dataSource.data = result;
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-      console.log(result);
-    },
-    (error) => {
-      console.log(error);
+    this._subSink.sink = this.examAPIService.get_ExamList_For_ExamComp().subscribe({
+      next: (result) => {
+        this.dataSource.data = result.$values;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        console.log(result);
+      }
     });
   }
 

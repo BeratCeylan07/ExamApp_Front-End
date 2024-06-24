@@ -88,7 +88,7 @@ export class LogListComponent implements AfterViewInit {
       .subscribe({
         next: (result) => {
           console.log("xxxxx: ",result);
-          this.dataSource.data = result;
+          this.dataSource.data = result.$values;
           this.progressBarMode = 'determinate';
           this.progressBarValue = 100;
         },

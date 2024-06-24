@@ -94,7 +94,7 @@ export class SessionListOfLessonComponent implements AfterViewInit {
       .get_lesson_session_list(this.lessonUID)
       .subscribe({
         next: (result) => {
-          this.dataSource.data = result;
+          this.dataSource.data = result.$values;
           console.log("ders oturumlar: ",result);
         },
         error: (error) => {
@@ -117,7 +117,11 @@ export class SessionListOfLessonComponent implements AfterViewInit {
       this.dialog.open(RecordOfLessonSesionComponent,{
         data:this.changeDataModel,
         autoFocus:true,
-        disableClose:true
+        disableClose:true,
+        width:"auto",
+        height:"auto",
+        maxWidth:"100%",
+        maxHeight:"95%"
       });
 
   }

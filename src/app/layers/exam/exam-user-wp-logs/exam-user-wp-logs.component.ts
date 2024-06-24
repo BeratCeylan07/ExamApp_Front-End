@@ -60,7 +60,7 @@ export class ExamUserWpLogsComponent implements AfterViewInit  {
   getMessageLogs(): void {
     this._subSink.sink = this._examApiservice.get_Wp_Logs(2,this.examUID).subscribe({
       next: (result) => {
-        this.dataSource.data = result;
+        this.dataSource.data = result.$values;
         console.log(result);
       },
       error: (error) => {

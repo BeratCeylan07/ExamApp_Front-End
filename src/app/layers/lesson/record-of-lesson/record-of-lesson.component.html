@@ -171,9 +171,19 @@
                                 </mat-card>
                             </mat-tab>
                             <mat-tab label="Öğrenci Kayıtları">
+                                <section>
+                                    <div class="example-button-row">
+                                      <button mat-flat-button color="primary" (click)="newLessonSessionStudentSetDialog()"><mat-icon>add</mat-icon>Öğrenci Tanımla</button>
+                                    </div>
+                                  </section>
                                 <app-student-list-of-lesson [lessonUID]="lessonUID"></app-student-list-of-lesson>
                             </mat-tab>
                             <mat-tab label="Oturumlar">
+                                <section>
+                                    <div class="example-button-row">
+                                      <button mat-flat-button color="primary" (click)="newLessonSessionDialogOpen()"><mat-icon>add</mat-icon>Yeni Oturum Oluştur</button>
+                                    </div>
+                                  </section>
                                 <app-session-list-of-lesson [lessonUID]="lessonUID"></app-session-list-of-lesson>
                             </mat-tab>
                             <mat-tab label="Ders İşlem Logları" [disabled]="false">

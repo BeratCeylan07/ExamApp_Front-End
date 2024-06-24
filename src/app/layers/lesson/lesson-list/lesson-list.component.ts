@@ -70,10 +70,10 @@ export class LessonListComponent {
     this.progressBarValue = 40;  // Change to desired value
     this._studentApiservice.get_lessonList().subscribe({
       next: (result) => {
-          this.dataSource.data = result;
+          this.dataSource.data = result.$values;
           this.progressBarMode = 'determinate';
           this.progressBarValue = 100;
-          console.log(this.dataSource.data);
+          console.log("xxxx",this.dataSource.data);
       },
       error: (error) => {
           this._dialog.open(ResultMessageBoxDialogComponent,{
@@ -94,11 +94,12 @@ export class LessonListComponent {
   lessonRecord(lessonUID: string): void{
     this._dialog.open(RecordOfLessonComponent,{
       data:lessonUID,
+      autoFocus:true,
+      disableClose:true,
       width:"auto",
       height:"auto",
       maxWidth:"100%",
-      maxHeight:"95%",
-      panelClass: 'custom-dialog-container-1'
+      maxHeight:"95%"
     });
   }
   ngAfterViewInit() {

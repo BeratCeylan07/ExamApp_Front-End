@@ -37,7 +37,7 @@ export class ExamCurrentOccupancyRatesComponent {
     this._subSink.sink = this._examAPIService.get_examChartsData().subscribe({
       next: (result) => {
 
-          const _dataPoints = result.map((x: { label: string; y: number; }) => ({
+          const _dataPoints = result.$values.map((x: { label: string; y: number; }) => ({
             label:x.label,
             y:x.y
           }));

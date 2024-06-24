@@ -84,7 +84,7 @@ export class EaxmRecordsOfStudentComponent implements AfterViewInit {
   getList() {
     this._apiService.get_RecordOfExam_For_User(this.userUID).subscribe(
       (result) => {
-        this.dataSource.data = result;
+        this.dataSource.data = result.$values;
         this.progressBarMode = 'determinate';
         this.progressBarValue = 100;  // Change to desired value
         console.log(result);

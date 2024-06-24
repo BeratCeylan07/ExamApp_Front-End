@@ -81,7 +81,7 @@ export class StudentExamSetDialogComponent implements AfterViewInit {
     
     this._subSink.sink = this._examApiservice.get_ExamList_For_StudentSetOpt(this.studentExamsetModel.studentUID).subscribe({
       next: (result) => {
-        this.examoptData = result;      
+        this.examoptData = result.$values;      
       },
       error: (error) => {
 
@@ -96,7 +96,7 @@ export class StudentExamSetDialogComponent implements AfterViewInit {
     this._isLoading = true;
     this._subSink.sink = this._examApiservice.get_SessionListOfExam(this.studentExamsetModel.examSessionUID).subscribe({
       next: (result) => {
-        this.sessionOptData = result;
+        this.sessionOptData = result.$values;
         console.log(this.sessionOptData);
       },
       error: (error) => {

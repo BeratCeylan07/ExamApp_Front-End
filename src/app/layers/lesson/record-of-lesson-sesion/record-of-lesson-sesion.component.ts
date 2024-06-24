@@ -29,6 +29,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { RecordOfLessonComponent } from '../record-of-lesson/record-of-lesson.component';
 import { DataChangeModel } from '../../../Services/Models/LessonModels/record-data-change.model';
 import { lessonRecordModel } from '../../../Services/Models/LessonModels/Lesson_Record_Model';
+import { StudentListOfLessonSessionComponent } from "../student-list-of-lesson-session/student-list-of-lesson-session.component";
 
 @Component({
     selector: 'app-record-of-lesson-sesion',
@@ -57,6 +58,7 @@ import { lessonRecordModel } from '../../../Services/Models/LessonModels/Lesson_
         MatPaginatorModule,
         TeacherSelectListComponent,
         MatSelectModule,
+        StudentListOfLessonSessionComponent
     ]
 })
 export class RecordOfLessonSesionComponent {
@@ -66,6 +68,7 @@ export class RecordOfLessonSesionComponent {
   teachers: any;
   userID = localStorage.getItem("userID");
   subeID = localStorage.getItem("subeID");
+  wait = true;
   lessonSessionInfo: lessonRecordModel = {
     id: 0,
     uid: '',
@@ -100,28 +103,46 @@ export class RecordOfLessonSesionComponent {
     private _lessonSessionAPIService: AppExamApiService,
     public dialog: MatDialog
   ) {}
+  teacherNameSurname = "";
+  teacherChange = false;
+  lessonSessionUID = "";
   ngOnInit(): void {
-    this.getTeacherList();
     this.getLessonSessionInfo();
-    if(this.dialogInput.teacherModel !== null){
-      console.log("if çalişti");
-      this.lessonSessionInfo.teacher = this.dialogInput.teacherModel;
-    }
+ 
   }
   ngOnDestroy(): void {
     this._subSink.unsubscribe();
+    this.dialogInput = {
+      teacherModel: [],
+      lessonSessionUID: ""
+    };
   }
   getLessonSessionInfo(): void{
     this._subSink.sink = this._lessonSessionAPIService.get_sessionofLesson_info(this.dialogInput.lessonSessionUID).subscribe({
       next: (result) => {
-        this.lessonSessionInfo = result;
-        this.lessonSessionInStudent.data = result.dersOturumUserSets;
+
+        if (this.dialogInput.teacherModel.length != 0) {
+          this.lessonSessionInfo = result;
+          this.lessonSessionInStudent.data = result.dersOturumUserSets;
+          this.lessonSessionInfo.teacher = this.dialogInput.teacherModel;
+          this.teacherNameSurname = this.lessonSessionInfo.teacher?.ad + " " + this.lessonSessionInfo.teacher?.soyad;
+          this.lessonSessionUID = this.lessonSessionInfo.uid;
+          this.wait = false;
+        }else{
+          this.lessonSessionInfo = result;
+          this.lessonSessionInStudent.data = result.dersOturumUserSets;
+          this.teacherNameSurname = this.lessonSessionInfo.teacher?.ad + " " + this.lessonSessionInfo.teacher?.soyad;
+          this.lessonSessionUID = this.lessonSessionInfo.uid;
+          this.wait = false;
+
+        }
       },
       error: (error) => {
 
       },
       complete: () => {
         this._isLoading = false;
+        
       }
     })
   }
@@ -135,23 +156,12 @@ export class RecordOfLessonSesionComponent {
     this.dialog.open(TeacherSelectListComponent,{
       data:this.dialogInput,
       autoFocus:true,
-      disableClose:true
+      disableClose:true,
+      maxHeight:"60%"
+    }).afterClosed().subscribe((result) => {
+      this.teacherChange = true;
     });
     this.dialogRef.close();
-  }
-  getTeacherList(): void{
-    this._subSink.sink = this._lessonSessionAPIService.get_teacherList().subscribe({
-      next: (result) => {
-          this.teachers = result;
-          console.log(result);
-      },
-      error: (error) => {
-
-      },
-      complete: () => {
-
-      }
-    })
   }
   MatDialogClose() : void{
     this.dialogRef.close();

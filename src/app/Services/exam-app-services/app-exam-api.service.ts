@@ -27,9 +27,9 @@ export class AppExamApiService {
   constructor(private _http: HttpClient) { }
 
   // DashBoard Requests Start
-  get_ExamList_For_Dashboard(): Observable<ExamList[]> {
+  get_ExamList_For_Dashboard() {
     const headers = { Authorization: 'Bearer ' + this.token };
-    return this._http.get<ExamList[]>(
+    return this._http.get<any>(
       this._ENDPOINTURL + 'exam/ExamListForDashBoard?subeID=1',
       { headers }
     );
@@ -61,9 +61,9 @@ export class AppExamApiService {
       { headers }
     );
   }
-  get_UserListOfExam_For_Dashboard(): Observable<UserListOfExamSeted[]> {
+  get_UserListOfExam_For_Dashboard() {
     const headers = { Authorization: 'Bearer ' + this.token };
-    return this._http.get<UserListOfExamSeted[]>(
+    return this._http.get<any>(
       this._ENDPOINTURL + 'student/DashBoardStudentList?subeID=1',
       { headers }
     );
@@ -71,7 +71,7 @@ export class AppExamApiService {
 
   get_ExamList_For_ExamComp() {
     const headers = { Authorization: 'Bearer ' + this.token };
-    return this._http.get<ExamInList[]>(
+    return this._http.get<any>(
       this._ENDPOINTURL + 'exam/List?subeID=1',
       { headers: headers }
     );
@@ -79,7 +79,7 @@ export class AppExamApiService {
 
   get_ExamList_For_StudentSetOpt(userUID: string) {
     const headers = { Authorization: 'Bearer ' + this.token };
-    return this._http.get<ExamInList[]>(
+    return this._http.get<any>(
       this._ENDPOINTURL + 'exam/ExamListWithNotUserSet?userUID=' + userUID,
       { headers: headers }
     );
@@ -87,7 +87,7 @@ export class AppExamApiService {
 
   get_UserList_For_UserLayer() {
     const headers = { Authorization: 'Bearer ' + this.token };
-    return this._http.get<UserListModel[]>(
+    return this._http.get<any>(
       this._ENDPOINTURL + 'student/UserList?subeID=1',
       { headers: headers }
     );
@@ -95,28 +95,28 @@ export class AppExamApiService {
 
   get_TeacherList() {
     const headers = { Authorization: 'Bearer ' + this.token };
-    return this._http.get<UserListModel[]>(
+    return this._http.get<any>(
       this._ENDPOINTURL + 'teacher/TeacherList?subeID=1',
       { headers: headers }
     );
   }
   get_TeacherSums(teacherUID: string) {
     const headers = { Authorization: 'Bearer ' + this.token };
-    return this._http.get<UserListModel[]>(
+    return this._http.get<any>(
       this._ENDPOINTURL + 'teacher/TeacherSums?teacherUID=' + teacherUID,
       { headers: headers }
     );
   }
   get_TeacherInfo(teacherUID: string) {
     const headers = { Authorization: 'Bearer ' + this.token };
-    return this._http.get<UserListModel[]>(
+    return this._http.get<any>(
       this._ENDPOINTURL + 'teacher/TeacherInfo?teacherUID=' + teacherUID,
       { headers: headers }
     );
   }
   get_UserRecord_Data(userUID: string) {
     const headers = { Authorization: 'Bearer ' + this.token };
-    return this._http.get<StudentRecordModel[]>(
+    return this._http.get<any>(
       this._ENDPOINTURL + 'student/StudentDetail?UID=' + userUID + '&subeid=1',
       { headers: headers }
     );
@@ -124,7 +124,7 @@ export class AppExamApiService {
 
   get_RecordOfExam_For_User(userUID: string) {
     const headers = { Authorization: 'Bearer ' + this.token };
-    return this._http.get<StudentExamListModel[]>(
+    return this._http.get<any>(
       this._ENDPOINTURL + 'exam/SessionListOfExamForStudent?userUID=' + userUID,
       { headers: headers }
     );
@@ -228,7 +228,7 @@ export class AppExamApiService {
     const headers = new HttpHeaders()
       .set('Authorization', 'Bearer ' + this.token)
       .set('Accept', 'text/plain');
-    return this._http.get<ExamSessionStudentListModel[]>(
+    return this._http.get<any>(
       this._ENDPOINTURL + 'exam/ExamSessionStudentList?examUID=' + examUID,
       { headers: headers }
     );
@@ -237,7 +237,7 @@ export class AppExamApiService {
     const headers = new HttpHeaders()
       .set('Authorization', 'Bearer ' + this.token)
       .set('Accept', 'text/plain');
-    return this._http.get<ExamRecordModel>(
+    return this._http.get<any>(
       this._ENDPOINTURL + 'exam/ExamSums?examUID=' + examUID,
       { headers: headers }
     );
@@ -246,7 +246,7 @@ export class AppExamApiService {
     const headers = new HttpHeaders()
       .set('Authorization', 'Bearer ' + this.token)
       .set('Accept', 'text/plain');
-    return this._http.get<ExamSessionStudentListModel[]>(
+    return this._http.get<any>(
       this._ENDPOINTURL + 'exam/SessionListOfExam?examUID=' + examUID,
       { headers: headers }
     );
@@ -255,7 +255,7 @@ export class AppExamApiService {
     const headers = new HttpHeaders()
       .set('Authorization', 'Bearer ' + this.token)
       .set('Accept', 'text/plain');
-    return this._http.get<ExamSessionStudentListModel[]>(
+    return this._http.get<any>(
       this._ENDPOINTURL + 'exam/StudentListNotInExam?examUID=' + examUID,
       { headers: headers }
     );
@@ -463,9 +463,53 @@ export class AppExamApiService {
     const headers = new HttpHeaders()
     .set('Authorization', 'Bearer ' + this.token)
     .set('Accept', 'text/plain');
-  return this._http.get<any>(
-    this._ENDPOINTURL + 'lesson/teacher_list?subeID=1',
-    { headers }
-  );
-}
+    return this._http.get<any>(
+      this._ENDPOINTURL + 'lesson/teacher_list?subeID=1',
+      { headers }
+    );
+  }
+  get_studentListOfLessonSession(lessonSessionUID: string){
+    const headers = new HttpHeaders()
+    .set('Authorization', 'Bearer ' + this.token)
+    .set('Accept', 'text/plain');
+    return this._http.get<any>(
+      this._ENDPOINTURL + 'lesson/student_list_of_lessonSession?lessonSessionUID='+lessonSessionUID,
+      { headers }
+    );
+  }
+  post_new_lessonSession(lessonSessionModel: any): Observable<any> {
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+      .set('Authorization', 'Bearer ' + this.token)
+      .set('Accept', 'text/plain');
+    return this._http.post<any>(
+      this._ENDPOINTURL + 'lesson/new_lesson_session',
+      lessonSessionModel,
+      {
+        headers: headers,
+      }
+    );
+  }
+  get_studentList(){
+    const headers = new HttpHeaders()
+    .set('Authorization', 'Bearer ' + this.token)
+    .set('Accept', 'text/plain');
+    return this._http.get<any>(
+      this._ENDPOINTURL + 'student/UserList?subeID=1',
+      { headers }
+    );
+  }
+  post_student_lessonSessionSet(studentSetModel: any): Observable<any> {
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+      .set('Authorization', 'Bearer ' + this.token)
+      .set('Accept', 'text/plain');
+    return this._http.post<any>(
+      this._ENDPOINTURL + 'lesson/student_lesson_session_set',
+      studentSetModel,
+      {
+        headers: headers,
+      }
+    );
+  }
 }
