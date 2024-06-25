@@ -39,7 +39,7 @@ export class LessonDashboardChartComponent {
     this._subSink.sink = this._lessonAPIService.get_lessonCharts(this.daily).subscribe({
       next: (result) => {
 
-          const _dataPoints = result.map((x: { label: string; y: number; }) => ({
+          const _dataPoints = result.$values.map((x: { label: string; y: number; }) => ({
             label:x.label,
             y:x.y
           }));

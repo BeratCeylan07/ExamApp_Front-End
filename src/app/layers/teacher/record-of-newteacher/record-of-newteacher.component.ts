@@ -75,7 +75,7 @@ export class RecordOfNewteacherComponent {
   getLessonList(): void {
     this._subSink.sink = this._studentService.get_lessonList().subscribe(
       (result) => {
-        this.lessonOpt = result;
+        this.lessonOpt = result.$values;
         console.log(result);
       },
       (error) => {

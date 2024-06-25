@@ -5,13 +5,16 @@
   }
 <div class="container-fluid p-0 m-0" style="height: 100% !important;">
     <div class="row p-0 m-0">
-        <div class="col-md-12 p-2 m-0" style="padding-left: 1.5rem !important;
+        <div class="col-md-6 col-sm-12 p-2 m-0" style="padding-left: 1.5rem !important;
         padding-right: 1.5rem !important;">
             <mat-card-title>
-                <h1 class="text-title-color" style="float:left !important;">
+                <h1 class="text-title-color text-center" style="float:left !important;">
                     <i class="fa fa-graduation-cap" aria-hidden="true"></i> Öğretmen kartı
                 </h1>
             </mat-card-title>
+            
+        </div>
+        <div class="col-md-6 col-sm-12">
             <button mat-icon-button color="warn" style="float:right !important;" (click)="MatDialogClose();">
                 <mat-icon>close</mat-icon>
               </button>
@@ -66,7 +69,7 @@
                                     <mat-list-item>
                                         <mat-icon matListItemIcon>person_add</mat-icon>
                                         <div matListItemTitle>Oluşturan</div>
-                                        <div matListItemLine>{{ userInfo.isCreatedUser.kullaniciAdi }}</div>
+                                        <div matListItemLine>{{ userInfo.isCreatedUser }}</div>
                                       </mat-list-item>
                                 </div>
                                 <div class="col-6">
@@ -81,7 +84,7 @@
                                     <mat-list-item>
                                         <mat-icon matListItemIcon>manage_accounts</mat-icon>
                                         <div matListItemTitle>Güncelleyen</div>
-                                        <div matListItemLine>{{ userInfo.isModifiedUser.kullaniciAdi }}</div>
+                                        <div matListItemLine>{{ userInfo.isModifiedUser }}</div>
                                       </mat-list-item>
                                 </div>    
                                 <div class="col-6">

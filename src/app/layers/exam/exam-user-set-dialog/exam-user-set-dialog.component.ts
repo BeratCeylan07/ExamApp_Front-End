@@ -132,8 +132,8 @@ export class ExamUserSetDialogComponent implements AfterViewInit {
       .get_SessionListOfExam(this._examUID)
       .subscribe({
         next: (result) => {
-          this.sessionOptData = result;
-          console.log(this.sessionOptData);
+          this.sessionOptData = result.$values;
+          console.log("xxxx",this.sessionOptData);
         },
         error: () => {},
         complete: () => {
@@ -147,9 +147,9 @@ export class ExamUserSetDialogComponent implements AfterViewInit {
       .get_StudentlistNotInExamSession(this._examUID)
       .subscribe({
         next: (result) => {
-          this.studentOptData = result;
+          this.studentOptData = result.$values;
           this.isLinear = !this.isLinear;
-          console.log(this.studentOptData);
+          console.log("yyyyyyy",this.studentOptData);
         },
         error: (error) => {
           console.log(error);
@@ -163,17 +163,17 @@ export class ExamUserSetDialogComponent implements AfterViewInit {
     this._subSink.unsubscribe();
   }
   studentSessionSet(): void {
-    this.userID = localStorage.getItem('userID');
+    this.userID = Number(localStorage.getItem('userID'));
     const studentExamSetModel = {
       examSessionUID: this.selectedExamSessionUID,
       studentUID: this.selectedStudentUID,
-      userUID: JSON.parse(this.userID)
+      userID: this.userID
     };
     this._subSink.sink = this._examApiservice
       .post_StudentExamSet(studentExamSetModel)
       .subscribe({
         next: (result) => {
-          this.examSetRes = result;
+          this.examSetRes = result.$values;
           console.log(result);
           this.progressBarMode = 'indeterminate';
           this.progressBarValue = 30;

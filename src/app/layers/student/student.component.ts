@@ -60,7 +60,7 @@ export class StudentComponent {
     }, 1000);
   }
   openDialog() {
-    const dialogRef = this.dialog.open(RecordOfStudentComponent, {
+    const dialogRef = this.dialog.open(RecordOfNewstudentComponent, {
       data:1,
       autoFocus:true,
       width:"500px",

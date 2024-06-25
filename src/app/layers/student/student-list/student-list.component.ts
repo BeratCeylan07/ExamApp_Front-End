@@ -68,7 +68,8 @@ export class StudentListComponent implements AfterViewInit {
       autoFocus:true,
       maxWidth:"100%",
       width:"100%",
-      height:"90%",
+      maxHeight:"100%",
+      height:"auto",
     }).afterClosed().subscribe(result => {
       // tekrar istek at
     });

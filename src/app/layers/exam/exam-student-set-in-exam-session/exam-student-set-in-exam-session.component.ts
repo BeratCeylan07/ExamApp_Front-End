@@ -81,7 +81,7 @@ export class ExamStudentSetInExamSessionComponent {
               .get_StudentlistNotInExamSession(this.examUID)
               .subscribe({
                 next: (result) => {
-                  this.studentOptData = result;
+                  this.studentOptData = result.$values;
                   this.isLinear = !this.isLinear;
                   console.log('record: ', this.studentOptData);
                 },

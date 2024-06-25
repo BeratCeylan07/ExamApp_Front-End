@@ -5,7 +5,7 @@
     }
     
     <div class="container-fluid p-0 m-0">
-        <div class="row p-0 m-0">
+        <div class="row">
             <div id="dialogHeadBtn" class="col-md-12 p-2 m-0" style="padding-left: 1.5rem !important; padding-right: 1.5rem !important">
                 <mat-card-title>
                     <h4 class="text-title-color" style="float: left !important">
@@ -21,8 +21,8 @@
                 <button mat-icon-button color="primary"  style="float: right !important; margin-right: 10px;"><mat-icon>done_outline</mat-icon></button>
             </div>
         </div>
-        <div class="row p-0 m-0">
-            <div class="col-md-4 col-sm-12 p-4 m-0 pr-0">
+        <div class="row" style="padding-bottom: 2rem;">
+            <div class="col-md-4 col-sm-12">
                 <mat-card class="example-card">
       
                     <mat-card-content [formGroup]="lessonFormGroup">
@@ -98,77 +98,58 @@
                     </mat-card-content>
                 </mat-card>
             </div>
-            <div class="col-md-8 col-sm-12 p-4 m-0 pl-0">
+            <div class="col-md-8 col-sm-12">
                 <mat-card class="example-card">
                     <mat-card-content>
                         <mat-tab-group>
                             <mat-tab label="Tüm Ders Bilgileri">
-                                <mat-card class="example-card">
-                                    <mat-card-content>
-                                        <mat-card class="recordCard">
-                                            <mat-card-header>
-                                                <mat-card-title>Ders Toplamları</mat-card-title>
-                                              </mat-card-header>
-                                            <mat-card-content>
-                                                <div class="row mt-2">
-                                                    <div class="col-md-4 col-sm-6 mt-1">
-                                                        <div class="card text-bg-primary w-100">
-                                                            <div class="card-header">Toplam Oturum</div>
-                                                            <div class="card-body">
-                                                                <h5 class="card-title">{{ lessonSums.toplamOturum | number:'1.2-2' }}
-                                                                </h5>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4 col-sm-6 mt-1">
-                                                        <div class="card text-bg-info w-100">
-                                                            <div class="card-header">Kayıtlı Öğrenci Toplamı</div>
-                                                            <div class="card-body">
-                                                                <h5 class="card-title">{{ lessonSums.toplamOgrenci | number:'1.2-2'  }}</h5>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4 col-sm-6 mt-1">
-                                                        <div class="card text-bg-warning w-100">
-                                                            <div class="card-header">Toplam Öğretmen</div>
-                                                            <div class="card-body">
-                                                                <h5 class="card-title">{{ lessonSums.toplamOgretmen | number:'1.2-2' }}</h5>
-                                                            </div>
-                                                        </div>
+                                        <div class="row mt-2">
+                                            <div class="col-md-4 col-sm-6 mt-1">
+                                                <div class="card text-bg-primary w-100">
+                                                    <div class="card-header">Toplam Oturum</div>
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">{{ lessonSums.toplamOturum | number:'1.2-2' }}
+                                                        </h5>
                                                     </div>
                                                 </div>
-                                            </mat-card-content>
-                                        </mat-card>
-                                            <mat-card class="recordCard mt-2">
-                                                <mat-card-header>
-                                                    <mat-card-title>Diğer Ders İşlemleri</mat-card-title>
-                                                  </mat-card-header>
-                                                <mat-card-content>                                    
-                                                    <div class="row mt-2">
-    
-                                                    <div class="col-md-4 col-sm-6">
-                                                    
-                                                        <button mat-flat-button class="btn-icon btn-whatsapp w-100"
-                                                        [disabled]="false"><i class="fa fa-brands fa-whatsapp fa-3x float-start"></i> <span class="float-end">Whatsapp Mesajları</span>
-                                                        </button>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 mt-1">
+                                                <div class="card text-bg-info w-100">
+                                                    <div class="card-header">Kayıtlı Öğrenci Toplamı</div>
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">{{ lessonSums.toplamOgrenci | number:'1.2-2'  }}</h5>
                                                     </div>
-                                                    <div class="col-md-4 col-sm-6">
-                                                        <button mat-flat-button class="btn-icon w-100" color="primary" [disabled]="true"
-                                                        ><i class="fa fa-brands fa-bell fa-3x float-start"></i> <span class="float-end">Cihaz Bildirim Mesajları</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="col-md-4 col-sm-6">
-                                                        <button mat-flat-button class="btn-icon w-100" color="warn" [disabled]="false"
-                                                        ><i class="fa fa-solid fa-book fa-3x float-start"></i> <i class="fa fa-solid fa-chart-pie"></i> <span class="float-end">Ders Raporlama</span>
-                                                        </button>
-                                                    </div>
-                                                                                                                         
                                                 </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 mt-1">
+                                                <div class="card text-bg-warning w-100">
+                                                    <div class="card-header">Toplam Öğretmen</div>
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">{{ lessonSums.toplamOgretmen | number:'1.2-2' }}</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-2">
     
-                                                </mat-card-content>   
-                                            </mat-card>
-                                    </mat-card-content>
-                                </mat-card>
+                                            <div class="col-md-4 col-sm-6">
+                                            
+                                                <button mat-flat-button class="btn-icon btn-whatsapp w-100"
+                                                [disabled]="false"><i class="fa fa-brands fa-whatsapp fa-3x float-start"></i> <span class="float-end">Whatsapp Mesajları</span>
+                                                </button>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6">
+                                                <button mat-flat-button class="btn-icon w-100" color="primary" [disabled]="true"
+                                                ><i class="fa fa-brands fa-bell fa-3x float-start"></i> <span class="float-end">Cihaz Bildirim Mesajları</span>
+                                                </button>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6">
+                                                <button mat-flat-button class="btn-icon w-100" color="warn" [disabled]="false"
+                                                ><i class="fa fa-solid fa-book fa-3x float-start"></i> <i class="fa fa-solid fa-chart-pie"></i> <span class="float-end">Ders Raporlama</span>
+                                                </button>
+                                            </div>
+                                                                                                                 
+                                        </div>                                                
                             </mat-tab>
                             <mat-tab label="Öğrenci Kayıtları">
                                 <section>

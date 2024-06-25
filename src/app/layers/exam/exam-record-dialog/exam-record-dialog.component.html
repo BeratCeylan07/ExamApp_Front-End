@@ -23,7 +23,7 @@
         </div>
     </div>
     <div class="row p-0 m-0">
-        <div class="col-md-3 col-sm-12 p-4 m-0 pr-0">
+        <div class="col-md-3 col-sm-12">
             <mat-card class="example-card">
   
                 <mat-card-content [formGroup]="newExamFormGroup">
@@ -104,13 +104,7 @@
                 <mat-card-content>
                     <mat-tab-group>
                         <mat-tab label="Tüm Sınav Bilgileri">
-                            <mat-card class="example-card">
-                                <mat-card-content>
-                                    <mat-card class="recordCard">
-                                        <mat-card-header>
-                                            <mat-card-title>Sınav Toplamları</mat-card-title>
-                                          </mat-card-header>
-                                        <mat-card-content>
+                                <strong>Sınav Toplamları</strong>
                                             <div class="row mt-2">
                                                 <div class="col-md-4 col-sm-6 mt-1">
                                                     <div class="card text-bg-primary w-100">
@@ -163,14 +157,9 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <strong>Diğer Sınav İşlemleri</strong>
 
-                                        </mat-card-content>
-                                    </mat-card>
-                                        <mat-card class="recordCard mt-2">
-                                            <mat-card-header>
-                                                <mat-card-title>Diğer Sınav İşlemleri</mat-card-title>
-                                              </mat-card-header>
-                                            <mat-card-content>                                    
+                                                                      
                                                 <div class="row mt-2">
 
                                                 <div class="col-md-4 col-sm-6">
@@ -192,15 +181,8 @@
                                                                                                                      
                                             </div>
 
-                                            </mat-card-content>   
-
-                                        </mat-card>
-
-                                        <mat-card class="recordCard mt-2">
-                                            <mat-card-header>
-                                                <mat-card-title></mat-card-title>
-                                              </mat-card-header>
-                                            <mat-card-content>                                    
+                                     
+                                                        
                                                 <div class="row mt-2">
 
                                                     <mat-list role="list">
@@ -241,12 +223,7 @@
                                                                                                                      
                                             </div>
 
-                                            </mat-card-content>   
-
-                                        </mat-card>
-                                </mat-card-content>
-
-                            </mat-card>
+                          
                         </mat-tab>
                         <mat-tab label="Öğrenci Kayıtları">
                             <app-exam-session-student-list [examUID]="examUID"></app-exam-session-student-list>

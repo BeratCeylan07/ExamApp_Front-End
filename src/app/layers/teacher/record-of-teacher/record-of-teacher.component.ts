@@ -124,7 +124,7 @@ export class RecordOfTeacherComponent {
   get_LessonList(): void{
     this._subSink.sink = this._studentApiservice.get_lessonList().subscribe({
       next: (result) => {
-        this.lessonOpt = result;
+        this.lessonOpt = result.$values;
       },
       error: (error) => {
         

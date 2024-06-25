@@ -8,7 +8,7 @@
     />
   </mat-form-field>
   
-  <div class="mat-elevation-z8">
+  <div class="mat-elevation-z8 table-responsive">
     <table mat-table [dataSource]="dataSource" matSort>
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Ad</th>
@@ -30,7 +30,7 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header>
           Branş
         </th>
-        <td mat-cell *matCellDef="let row">{{ row.userDersSets[0].ders.dersAd }}</td>
+        <td mat-cell *matCellDef="let row">{{ row.userDersSets.$values[0].ders.dersAd }}</td>
       </ng-container>
       <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>
