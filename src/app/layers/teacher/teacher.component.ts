@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { RecordOfNewstudentComponent } from '../student/record-of-newstudent/record-of-newstudent.component';
 import { MatButtonModule } from '@angular/material/button';
@@ -55,6 +55,8 @@ export class TeacherComponent {
   ngOnInit(): void {
     this.isLoading = true;
   }
+  @ViewChild(TeacherListComponent) teacherListComponent!: TeacherListComponent;
+
   ngAfterContentInit(): void {
     setTimeout(() => {
       this.isLoading = false;
@@ -66,6 +68,8 @@ export class TeacherComponent {
       autoFocus:true,
       width:"auto",
       height:"auto"
+    }).afterClosed().subscribe((result) => {
+      this.teacherListComponent.getTeacherList();
     });
   }
   getLessonList(): void{

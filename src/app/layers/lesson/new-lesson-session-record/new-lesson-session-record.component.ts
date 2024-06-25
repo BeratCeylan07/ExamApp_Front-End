@@ -53,7 +53,7 @@ export class NewLessonSessionRecordComponent {
   getTeacherList(): void{
     this._subSink.sink = this._lessonAPIService.get_teacherList().subscribe({
       next: (result) => {
-        this.teachers = result;
+        this.teachers = result.$values;
       },
       error: (error) => {
       },

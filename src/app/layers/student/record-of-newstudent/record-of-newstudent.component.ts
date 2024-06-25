@@ -41,7 +41,7 @@ export class RecordOfNewstudentComponent {
     eposta: '',
     subeID: 1,
     studentUID:'',
-    role:0,
+    role:1,
     userID: Number(localStorage.getItem("userID")),
   };
 
@@ -62,8 +62,7 @@ export class RecordOfNewstudentComponent {
     this.progressBarValue = 40;
     this._studentService.post_Student(this.newStudentData).subscribe(
       (result) => {
-        console.log(result);
-        this.dialogRef.close();
+         this.dialogRef.close();
 
         this.progressBarMode = 'determinate';
         this.progressBarValue = 100; // Change to desired value

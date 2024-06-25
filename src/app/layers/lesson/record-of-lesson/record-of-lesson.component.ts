@@ -70,7 +70,6 @@ export class RecordOfLessonComponent {
   ) {}
   @ViewChild(SessionListOfLessonComponent) sesionList!: SessionListOfLessonComponent;
   @ViewChild(StudentListOfLessonComponent) studentList!: StudentListOfLessonComponent;
-
   examSums: any = {
     toplamOturum: 0,
     toplamKayitliOgrenci: 0,
@@ -94,7 +93,7 @@ export class RecordOfLessonComponent {
     this.getLessonSums();
     setTimeout(() => {
       this._isLoading = false;
-    }, 1500);
+    }, 2000);
   }
   newLessonSessionDialogOpen(): void{
     this._subSink.sink = this.dialog.open(NewLessonSessionRecordComponent,{

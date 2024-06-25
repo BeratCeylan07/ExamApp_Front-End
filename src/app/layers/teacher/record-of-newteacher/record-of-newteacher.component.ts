@@ -55,7 +55,7 @@ export class RecordOfNewteacherComponent {
     eposta: new FormControl(""),
     dersUID: new FormControl("",[Validators.required]),
     subeID: new FormControl(this.newStudentData.subeID),
-    userID: new FormControl(this.newStudentData.userID)
+    userID: new FormControl(this.newStudentData.userID),
   });
   selectedLessonUID!: any;
   lessonOpt!: any;

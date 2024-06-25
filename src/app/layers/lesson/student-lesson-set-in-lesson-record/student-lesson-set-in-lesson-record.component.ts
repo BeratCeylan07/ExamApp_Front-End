@@ -53,7 +53,7 @@ export class StudentLessonSetInLessonRecordComponent {
   getLessonSessionList(): void{
     this._subSink.sink = this._lessonAPIService.get_lesson_session_list(this._lessonUID).subscribe({
       next: (result) => {
-        this.sessions = result;
+        this.sessions = result.$values;
         console.log(result);
       },
       error: (error) => {
@@ -67,7 +67,7 @@ export class StudentLessonSetInLessonRecordComponent {
   getStudentList(): void{
     this._subSink.sink = this._lessonAPIService.get_studentList().subscribe({
       next: (result) => {
-        this.students = result;
+        this.students = result.$values
         console.log(result);
       },
       error: (error) => {

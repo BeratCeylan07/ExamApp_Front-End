@@ -75,6 +75,7 @@ export class StudentListOfLessonComponent implements AfterViewInit {
       .subscribe({
         next: (result) => {
           this.dataSource.data = result.$values;
+          console.log(this.dataSource.data);
         },
         error: (error) => {
           this.dialog.open(ResultMessageBoxDialogComponent, {
