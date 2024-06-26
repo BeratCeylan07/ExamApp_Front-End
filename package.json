@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "^17.3.0",
     "@angular/router": "^17.3.0",
     "@canvasjs/angular-charts": "^1.2.0",
+    "@uiowa/digit-only": "^3.2.1",
     "angular-font-awesome": "^3.1.2",
     "bootstrap": "^5.3.3",
     "firebase": "^10.12.2",

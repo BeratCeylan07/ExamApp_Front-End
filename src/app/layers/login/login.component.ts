@@ -50,14 +50,11 @@ export class LoginComponent {
         localStorage.setItem("userUID",result.userUID);
         localStorage.setItem("subeID",result.subeID);
         localStorage.setItem("userID",result.userID);
-        this.isLoading = false;
         this.router.navigate(['examapp']);
       }
     },(error) => {
       console.log(error);
     });
-    setTimeout(() => {
-      this.isLoading = false;
-    }, 2000);
+   
   }
 }

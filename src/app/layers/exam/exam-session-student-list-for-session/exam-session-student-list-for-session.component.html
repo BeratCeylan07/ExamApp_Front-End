@@ -16,7 +16,7 @@
     <table mat-table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="student">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Öğrenci</th>
-            <td mat-cell *matCellDef="let row">{{ row.students.ad }} {{ row.students.soyad }}</td>
+            <td mat-cell *matCellDef="let row">{{ row.students }}</td>
           </ng-container>
         <ng-container matColumnDef="isCreatedDate">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Kayıt Tarihi</th>
@@ -33,14 +33,14 @@
       <ng-container matColumnDef="d" class="w-100">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Doğru</th>
         <td mat-cell *matCellDef="let row">
-          <input matInput #input class="form-control form-control-sm" (input)="rowChangeTrue()" [(ngModel)]="row.dogru"/>
+          <input matInput #input class="form-control form-control-sm" (input)="rowChangeTrue();studentSessionScoreSet(row);" [(ngModel)]="row.dogru"/>
         </td>
         
       </ng-container>
       <ng-container matColumnDef="y">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Yanlış</th>
         <td mat-cell *matCellDef="let row">
-          <input matInput #input class="form-control form-control-sm" [(ngModel)]="row.yanlis"/>
+          <input matInput #input class="form-control form-control-sm" (input)="rowChangeTrue();studentSessionScoreSet(row);" [(ngModel)]="row.yanlis"/>
         </td>
       </ng-container>
       <ng-container matColumnDef="n">
@@ -48,7 +48,7 @@
         <td mat-cell *matCellDef="let row">
           <input matInput #input class="form-control form-control-sm" style="width: 60px;
           max-width: 100%;
-          min-width: 100%;" [(ngModel)]="row.net"/>
+          min-width: 100%;" [(ngModel)]="row.net" [readonly]="true" [disabled]="true"/>
         </td>
       </ng-container>
       <ng-container matColumnDef="actions">

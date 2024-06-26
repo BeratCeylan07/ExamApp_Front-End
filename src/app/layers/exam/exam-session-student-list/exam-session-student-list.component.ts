@@ -106,6 +106,30 @@ export class ExamSessionStudentListComponent implements AfterViewInit {
       }
     });
   }
+  allNetCalculate(): void {
+    this.isLoading = true;
+    this.progressBarMode = 'indeterminate';
+    this.progressBarValue = 30;
+    this._subSink.sink = this._apiService.get_examAllScoreCalculate(this.examUID).subscribe({
+      next: (result) => {
+        this.getList();
+      },
+      error: (error) => {
+        this.dialog.open(ResultMessageBoxDialogComponent,{
+          data:{
+            title:"Hata Oluştu",
+            message: error.message
+          }
+        })
+      },
+      complete: () => {
+        this.progressBarMode = 'determinate';
+        this.progressBarValue = 100;
+        this.isLoading = false;
+      }
+    })
+
+  }
   ngOnDestroy(): void {
     this._subSink.unsubscribe();
   }

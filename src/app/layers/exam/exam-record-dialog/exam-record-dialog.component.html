@@ -31,7 +31,7 @@
                         <div class="col-md-12">
                             <mat-form-field>
                                 <mat-label>UID</mat-label>
-                                <input matInput formControlName="uid" [(ngModel)]="examInfo.uid" readonly="true" [disabled]="true"/>
+                                <input matInput formControlName="examUID" [(ngModel)]="examInfo.uid" readonly="true" [disabled]="true"/>
                             </mat-form-field>
                         </div>
                         <div class="col-md-12">
@@ -55,7 +55,12 @@
                         <div class="col-md-6">
                             <mat-form-field>
                                 <mat-label>Sınav Ücreti</mat-label>
-                                <input matInput formControlName="ucret" [(ngModel)]="examInfo.ucret " />
+                                <input 
+                                matInput
+                                maxlength="4" pattern="\d*" (input)="validateInput($event)"
+                                formControlName="ucret"
+                                [(ngModel)]="examInfo.ucret"
+                            />
                             </mat-form-field>
                         </div>
                         <div class="col-md-6">
@@ -67,23 +72,32 @@
                         <div class="col-md-6 col-sm-12">
                             <mat-form-field>
                                 <mat-label>Toplam Kitapçık</mat-label>
-                                <input matInput type="number" formControlName="kitapcikToplam"
+                                <input matInput maxlength="4" min="0" max="10" formControlName="kitapcikToplam"
                                     [(ngModel)]="examInfo.kitapcikToplam" />
                             </mat-form-field>
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <mat-form-field>
                                 <mat-label>Kitapçık Adet Maliyet</mat-label>
-                                <input matInput type="number" formControlName="kitapcikAdetMaliyet"
+                                <input matInput type="number"  maxlength="4" formControlName="kitapcikAdetMaliyet"
                                     [(ngModel)]="examInfo.kitapcikAdetMaliyet" />
                             </mat-form-field>
                         </div>
-                        <div class="col-md-12 col-sm-12">
+                        <div class="col-md-6 col-sm-12">
                             <section class="example-section">
-                                <mat-slide-toggle class="example-margin" color="primary" [checked]="examInfo.isActive">
-                                    @if(examInfo.isActive == true){
+                                <mat-slide-toggle class="example-margin" color="primary" formControlName="isActive" [checked]="examInfo.isActive">
+                                    @if(examInfo.isActive){
                                     <strong>Aktif Sınav</strong> }@else{
                                     <strong>Sınav Kapalı</strong> }
+                                </mat-slide-toggle>
+                            </section>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <section class="example-section">
+                                <mat-slide-toggle class="example-margin" color="primary" formControlName="dortBirRule" [checked]="examInfo.dortBirRule">
+                                    @if(examInfo.dortBirRule){
+                                    <strong>4 - 1 Aktif</strong> }@else{
+                                    <strong>4 - 1 Pasif</strong> }
                                 </mat-slide-toggle>
                             </section>
                         </div>

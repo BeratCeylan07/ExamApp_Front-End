@@ -253,6 +253,15 @@ export class AppExamApiService {
       { headers: headers }
     );
   }
+  get_examAllScoreCalculate(examUID: string) {
+    const headers = new HttpHeaders()
+      .set('Authorization', 'Bearer ' + this.token)
+      .set('Accept', 'text/plain');
+    return this._http.get<any>(
+      this._ENDPOINTURL + 'exam/ExamAllScoreSet?examUID=' + examUID,
+      { headers: headers }
+    );
+  }
   get_StudentlistNotInExamSession(examUID: string) {
     const headers = new HttpHeaders()
       .set('Authorization', 'Bearer ' + this.token)
