@@ -37,7 +37,7 @@ import { SubSink } from 'subsink';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-  loginObj = { branchNo: '', userName: 'BerCey17', userPassword: '960607Brt.' };
+  loginObj = { branchNo: '', userName: 'demo', userPassword: 'demo123' };
   isLoading = false;
   private _subSink = new SubSink();
   constructor(private authService: AuthLoginService,private router: Router) {}

@@ -21,7 +21,7 @@ import { lessonRecordModel } from '../Models/LessonModels/Lesson_Record_Model';
   providedIn: 'root',
 })
 export class AppExamApiService {
-  // private _ENDPOINTURL = 'https://localhost:7016/api/';
+ // private _ENDPOINTURL = 'https://localhost:7016/api/';
   private _ENDPOINTURL = 'https://beratceylan0007.bsite.net/api/';
 
   public token = localStorage.getItem('_APIToken')?.toString();
