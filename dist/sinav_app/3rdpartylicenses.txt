@@ -8,7 +8,7 @@ License: "MIT"
 Package: @canvasjs/charts
 License: "SEE LICENSE IN <LICENSE>"
 
-CanvasJS Chart - v3.8.8 GA - https://canvasjs.com/ 
+CanvasJS Chart - v3.10.2 GA - https://canvasjs.com/ 
 Copyright 2024 fenopix
 
 --------------------- License Information --------------------

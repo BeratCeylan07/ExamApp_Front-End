@@ -1,10 +1,10 @@
 import {
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR
-} from "./chunk-L5UVISHY.js";
+} from "./chunk-PILV5CB6.js";
 import {
   DOCUMENT
-} from "./chunk-A5CX3RVZ.js";
+} from "./chunk-U5OSXHD5.js";
 import {
   Directive,
   ElementRef,
@@ -27,7 +27,7 @@ import {
   ɵɵdefinePipe,
   ɵɵgetInheritedFactory,
   ɵɵlistener
-} from "./chunk-FJ2FORF3.js";
+} from "./chunk-XIMIHY4B.js";
 import {
   __async,
   __objRest,
@@ -351,13 +351,23 @@ var _NgxMaskApplierService = class _NgxMaskApplierService {
         }
       }
       if (backspaced) {
-        if (inputValue[0] === "0" && inputValue[1] === this.decimalMarker && (inputValue[position] === "0" || inputValue[position] === this.decimalMarker)) {
-          inputValue = inputValue.slice(2, inputValue.length);
+        const inputValueAfterZero = inputValue.slice(this._findFirstNonZeroDigitIndex(inputValue), inputValue.length);
+        const positionOfZeroOrDecimalMarker = inputValue[position] === "0" || inputValue[position] === decimalMarker;
+        const zeroIndexNumberZero = inputValue[0] === "0";
+        const zeroIndexMinus = inputValue[0] === "-";
+        const zeroIndexThousand = inputValue[0] === this.thousandSeparator;
+        const firstIndexDecimalMarker = inputValue[1] === decimalMarker;
+        const firstIndexNumberZero = inputValue[1] === "0";
+        const secondIndexDecimalMarker = inputValue[2] === decimalMarker;
+        if (zeroIndexNumberZero && firstIndexDecimalMarker && positionOfZeroOrDecimalMarker && position < 2) {
+          inputValue = inputValueAfterZero;
         }
-        if (inputValue[0] === "-" && inputValue[1] === "0" && inputValue[2] === this.decimalMarker && (inputValue[position] === "0" || inputValue[position] === this.decimalMarker)) {
-          inputValue = "-" + inputValue.slice(3, inputValue.length);
+        if (zeroIndexMinus && firstIndexNumberZero && secondIndexDecimalMarker && positionOfZeroOrDecimalMarker && position < 3) {
+          inputValue = "-" + inputValueAfterZero;
         }
-        inputValue = this._compareOrIncludes(inputValue[inputValue.length - 1], this.decimalMarker, this.thousandSeparator) ? inputValue.slice(0, inputValue.length - 1) : inputValue;
+        if (inputValueAfterZero !== "-" && (position === 0 && (zeroIndexNumberZero || zeroIndexThousand) || this.allowNegativeNumbers && position === 1 && zeroIndexMinus && !firstIndexNumberZero)) {
+          inputValue = zeroIndexMinus ? "-" + inputValueAfterZero : inputValueAfterZero;
+        }
       }
       const thousandSeparatorCharEscaped = this._charToRegExpExpression(this.thousandSeparator);
       let invalidChars = '@#!$%^&*()_+|~=`{}\\[\\]:\\s,\\.";<>?\\/'.replace(thousandSeparatorCharEscaped, "");
@@ -396,7 +406,7 @@ var _NgxMaskApplierService = class _NgxMaskApplierService {
           this._shift.add(position + _shift);
           _shift++;
         } while (_shift < shiftStep);
-      } else if (result[position - 1] === this.decimalMarker || shiftStep === -4 || shiftStep === -3 || result[position] === ",") {
+      } else if (result[position - 1] === this.decimalMarker || shiftStep === -4 || shiftStep === -3 || result[position] === this.thousandSeparator) {
         this._shift.clear();
         this._shift.add(position - 1);
       } else if (commaShift !== 0 && position > 0 && !(result.indexOf(
@@ -492,7 +502,6 @@ var _NgxMaskApplierService = class _NgxMaskApplierService {
           const inputValueCursorPlusTwo = inputValue[cursor + 2];
           const inputValueCursorMinusOne = inputValue[cursor - 1];
           const inputValueCursorMinusTwo = inputValue[cursor - 2];
-          const inputValueCursorMinusThree = inputValue[cursor - 3];
           const inputValueSliceMinusThreeMinusOne = inputValue.slice(cursor - 3, cursor - 1);
           const inputValueSliceMinusOnePlusOne = inputValue.slice(cursor - 1, cursor + 1);
           const inputValueSliceCursorPlusTwo = inputValue.slice(cursor, cursor + 2);
@@ -500,7 +509,7 @@ var _NgxMaskApplierService = class _NgxMaskApplierService {
           if (maskExpression[cursor] === "d") {
             const maskStartWithMonth = maskExpression.slice(0, 2) === "M0";
             const startWithMonthInput = maskExpression.slice(0, 2) === "M0" && this.specialCharacters.includes(inputValueCursorMinusTwo);
-            if (Number(inputSymbol) > 3 && this.leadZeroDateTime || !maskStartWithMonth && (Number(inputValueSliceCursorPlusTwo) > daysCount || Number(inputValueSliceMinusOnePlusOne) > daysCount || this.specialCharacters.includes(inputValueCursorPlusOne) && !backspaced) || (startWithMonthInput ? Number(inputValueSliceMinusOnePlusOne) > daysCount || !this.specialCharacters.includes(inputValueCursor) && this.specialCharacters.includes(inputValueCursorPlusTwo) || this.specialCharacters.includes(inputValueCursor) : Number(inputValueSliceCursorPlusTwo) > daysCount || this.specialCharacters.includes(inputValueCursorPlusOne) && !backspaced)) {
+            if (Number(inputSymbol) > 3 && this.leadZeroDateTime || !maskStartWithMonth && (Number(inputValueSliceCursorPlusTwo) > daysCount || Number(inputValueSliceMinusOnePlusOne) > daysCount || this.specialCharacters.includes(inputValueCursorPlusOne)) || (startWithMonthInput ? Number(inputValueSliceMinusOnePlusOne) > daysCount || !this.specialCharacters.includes(inputValueCursor) && this.specialCharacters.includes(inputValueCursorPlusTwo) || this.specialCharacters.includes(inputValueCursor) : Number(inputValueSliceCursorPlusTwo) > daysCount || this.specialCharacters.includes(inputValueCursorPlusOne))) {
               position = !this.leadZeroDateTime ? position + 1 : position;
               cursor += 1;
               this._shiftStep(maskExpression, cursor, inputArray.length);
@@ -515,8 +524,8 @@ var _NgxMaskApplierService = class _NgxMaskApplierService {
             const monthsCount = 12;
             const withoutDays = cursor === 0 && (Number(inputSymbol) > 2 || Number(inputValueSliceCursorPlusTwo) > monthsCount || this.specialCharacters.includes(inputValueCursorPlusOne) && !backspaced);
             const specialChart = maskExpression.slice(cursor + 2, cursor + 3);
-            const day1monthInput = inputValueSliceMinusThreeMinusOne.includes(specialChart) && maskExpression.includes("d0") && (this.specialCharacters.includes(inputValueCursorMinusTwo) && Number(inputValueSliceMinusOnePlusOne) > monthsCount && !this.specialCharacters.includes(inputValueCursor) || this.specialCharacters.includes(inputValueCursor) || this.specialCharacters.includes(inputValueCursorMinusThree) && Number(inputValueSliceMinusTwoCursor) > monthsCount && !this.specialCharacters.includes(inputValueCursorMinusOne) || this.specialCharacters.includes(inputValueCursorMinusOne));
-            const day2monthInput = Number(inputValueSliceMinusThreeMinusOne) <= daysCount && !this.specialCharacters.includes(inputValueSliceMinusThreeMinusOne) && this.specialCharacters.includes(inputValueCursorMinusOne) && (Number(inputValueSliceCursorPlusTwo) > monthsCount || this.specialCharacters.includes(inputValueCursorPlusOne) && !backspaced);
+            const day1monthInput = inputValueSliceMinusThreeMinusOne.includes(specialChart) && maskExpression.includes("d0") && (this.specialCharacters.includes(inputValueCursorMinusTwo) && Number(inputValueSliceMinusOnePlusOne) > monthsCount && !this.specialCharacters.includes(inputValueCursor) || this.specialCharacters.includes(inputValueCursor));
+            const day2monthInput = Number(inputValueSliceMinusThreeMinusOne) <= daysCount && !this.specialCharacters.includes(inputValueSliceMinusThreeMinusOne) && this.specialCharacters.includes(inputValueCursorMinusOne) && (Number(inputValueSliceCursorPlusTwo) > monthsCount || this.specialCharacters.includes(inputValueCursorPlusOne));
             const day2monthInputDot = Number(inputValueSliceCursorPlusTwo) > monthsCount && cursor === 5 || this.specialCharacters.includes(inputValueCursorPlusOne) && cursor === 5;
             const day1monthPaste = Number(inputValueSliceMinusThreeMinusOne) > daysCount && !this.specialCharacters.includes(inputValueSliceMinusThreeMinusOne) && !this.specialCharacters.includes(inputValueSliceMinusTwoCursor) && Number(inputValueSliceMinusTwoCursor) > monthsCount && maskExpression.includes("d0");
             const day2monthPaste = Number(inputValueSliceMinusThreeMinusOne) <= daysCount && !this.specialCharacters.includes(inputValueSliceMinusThreeMinusOne) && !this.specialCharacters.includes(inputValueCursorMinusOne) && Number(inputValueSliceMinusOnePlusOne) > monthsCount;
@@ -533,7 +542,7 @@ var _NgxMaskApplierService = class _NgxMaskApplierService {
           }
           result += inputSymbol;
           cursor++;
-        } else if (inputSymbol === " " && maskExpression[cursor] === " " || inputSymbol === "/" && maskExpression[cursor] === "/") {
+        } else if (this.specialCharacters.includes(inputSymbol) && maskExpression[cursor] === inputSymbol) {
           result += inputSymbol;
           cursor++;
         } else if (this.specialCharacters.indexOf(
@@ -616,6 +625,10 @@ var _NgxMaskApplierService = class _NgxMaskApplierService {
     let res = `${this.prefix}${onlySpecial ? "" : result}${this.showMaskTyped ? "" : this.suffix}`;
     if (result.length === 0) {
       res = !this.dropSpecialCharacters ? `${this.prefix}${result}` : `${result}`;
+    }
+    const isSpecialCharacterMaskFirstSymbol = inputValue.length === 1 && this.specialCharacters.includes(maskExpression[0]) && inputValue !== maskExpression[0];
+    if (!this._checkSymbolMask(inputValue, maskExpression[1]) && isSpecialCharacterMaskFirstSymbol) {
+      return "";
     }
     if (result.includes(
       "-"
@@ -707,6 +720,15 @@ var _NgxMaskApplierService = class _NgxMaskApplierService {
       return integerString === "" ? "" : `${emptyOrMinus}${integerString}${decimal}${decimalPart}`;
     }
   }
+  _findFirstNonZeroDigitIndex(inputString) {
+    for (let i = 0; i < inputString.length; i++) {
+      const char = inputString[i];
+      if (char && char >= "1" && char <= "9") {
+        return i;
+      }
+    }
+    return -1;
+  }
 };
 _NgxMaskApplierService.ɵfac = function NgxMaskApplierService_Factory(t) {
   return new (t || _NgxMaskApplierService)();
@@ -746,7 +768,6 @@ var _NgxMaskService = class _NgxMaskService extends NgxMaskApplierService {
       optional: true
     });
   }
-  // eslint-disable-next-line complexity
   applyMask(inputValue, maskExpression, position = 0, justPasted = false, backspaced = false, cb = () => {
   }) {
     if (!maskExpression) {
@@ -820,7 +841,7 @@ var _NgxMaskService = class _NgxMaskService extends NgxMaskApplierService {
     } else {
       newInputValue = Boolean(newInputValue) && newInputValue.length ? newInputValue : inputValue;
     }
-    if (this.showMaskTyped && this.keepCharacterPositions && this.actualValue && !justPasted) {
+    if (this.showMaskTyped && this.keepCharacterPositions && this.actualValue && !justPasted && !this.writingValue) {
       const value = this.dropSpecialCharacters ? this.removeMask(this.actualValue) : this.actualValue;
       this.formControlResult(value);
       return this.actualValue ? this.actualValue : `${this.prefix}${this.maskIsShown}${this.suffix}`;
@@ -844,7 +865,7 @@ var _NgxMaskService = class _NgxMaskService extends NgxMaskApplierService {
       this._currentValue = result;
       this._emitValue = this._previousValue !== this._currentValue || this.maskChanged || this._previousValue === this._currentValue && justPasted;
     }
-    this._emitValue ? this.writingValue ? requestAnimationFrame(() => this.formControlResult(result)) : this.formControlResult(result) : "";
+    this._emitValue ? this.writingValue && this.triggerOnMaskChange ? requestAnimationFrame(() => this.formControlResult(result)) : this.formControlResult(result) : "";
     if (!this.showMaskTyped || this.showMaskTyped && this.hiddenInput) {
       if (this.hiddenInput) {
         if (backspaced) {
@@ -1129,7 +1150,7 @@ var _NgxMaskService = class _NgxMaskService extends NgxMaskApplierService {
    */
   formControlResult(inputValue) {
     if (this.writingValue || !this.triggerOnMaskChange && this.maskChanged) {
-      this.maskChanged ? this.onChange(this.outputTransformFn(this._toNumber(this._checkSymbols(this._removeSuffix(this._removePrefix(inputValue)))))) : "";
+      this.triggerOnMaskChange && this.maskChanged ? this.onChange(this.outputTransformFn(this._toNumber(this._checkSymbols(this._removeSuffix(this._removePrefix(inputValue)))))) : "";
       this.maskChanged = false;
       return;
     }
@@ -1386,6 +1407,7 @@ var _NgxMaskDirective = class _NgxMaskDirective {
     this._maskValue = "";
     this._position = null;
     this._maskExpressionArray = [];
+    this._allowFewMaskChangeMask = false;
     this._justPasted = false;
     this._isFocused = false;
     this._isComposing = false;
@@ -1533,7 +1555,6 @@ var _NgxMaskDirective = class _NgxMaskDirective {
     }
     this._applyMask();
   }
-  // eslint-disable-next-line complexity
   validate({
     value
   }) {
@@ -1563,6 +1584,22 @@ var _NgxMaskDirective = class _NgxMaskDirective {
     }
     if (value && value.toString().length >= 1) {
       let counterOfOpt = 0;
+      if (this._maskValue.includes(
+        "{"
+        /* MaskExpression.CURLY_BRACKETS_LEFT */
+      ) && this._maskValue.includes(
+        "}"
+        /* MaskExpression.CURLY_BRACKETS_RIGHT */
+      )) {
+        const lengthInsideCurlyBrackets = this._maskValue.slice(this._maskValue.indexOf(
+          "{"
+          /* MaskExpression.CURLY_BRACKETS_LEFT */
+        ) + 1, this._maskValue.indexOf(
+          "}"
+          /* MaskExpression.CURLY_BRACKETS_RIGHT */
+        ));
+        return lengthInsideCurlyBrackets === String(value.length) ? null : this._createValidationError(value);
+      }
       if (this._maskValue.startsWith(
         "percent"
         /* MaskExpression.PERCENT */
@@ -1592,17 +1629,6 @@ var _NgxMaskDirective = class _NgxMaskDirective {
         }
       }
       if (this._maskValue.indexOf(
-        "{"
-        /* MaskExpression.CURLY_BRACKETS_LEFT */
-      ) === 1 && value.toString().length === this._maskValue.length + Number((this._maskValue.split(
-        "{"
-        /* MaskExpression.CURLY_BRACKETS_LEFT */
-      )[1] ?? "").split(
-        "}"
-        /* MaskExpression.CURLY_BRACKETS_RIGHT */
-      )[0]) - 4) {
-        return null;
-      } else if (this._maskValue.indexOf(
         "*"
         /* MaskExpression.SYMBOL_STAR */
       ) > 1 && value.toString().length < this._maskValue.indexOf(
@@ -1614,10 +1640,7 @@ var _NgxMaskDirective = class _NgxMaskDirective {
       ) > 1 && value.toString().length < this._maskValue.indexOf(
         "?"
         /* MaskExpression.SYMBOL_QUESTION */
-      ) || this._maskValue.indexOf(
-        "{"
-        /* MaskExpression.CURLY_BRACKETS_LEFT */
-      ) === 1) {
+      )) {
         return this._createValidationError(value);
       }
       if (this._maskValue.indexOf(
@@ -1783,7 +1806,14 @@ var _NgxMaskDirective = class _NgxMaskDirective {
         }
         if (this._maskExpressionArray.length) {
           if (this._code === "Backspace") {
-            position = this.specialCharacters.includes(this._inputValue.slice(position - 1, position)) ? position - 1 : position;
+            const specialChartMinusOne = this.specialCharacters.includes(this._maskService.actualValue.slice(position - 1, position));
+            const specialChartPlusOne = this.specialCharacters.includes(this._maskService.actualValue.slice(position, position + 1));
+            if (this._allowFewMaskChangeMask && !specialChartPlusOne) {
+              position = el.selectionStart + 1;
+              this._allowFewMaskChangeMask = false;
+            } else {
+              position = specialChartMinusOne ? position - 1 : position;
+            }
           } else {
             position = el.selectionStart === 1 ? el.selectionStart + this._maskService.prefix.length : el.selectionStart;
           }
@@ -1875,7 +1905,6 @@ var _NgxMaskDirective = class _NgxMaskDirective {
       el.selectionEnd = this._getActualInputLength();
     }
   }
-  // eslint-disable-next-line complexity
   onKeyDown(e) {
     if (!this._maskValue) {
       return;
@@ -1956,13 +1985,10 @@ var _NgxMaskDirective = class _NgxMaskDirective {
           if (!Array.isArray(this._maskService.decimalMarker)) {
             inputValue = this._maskService.decimalMarker !== localeDecimalMarker ? inputValue.replace(localeDecimalMarker, this._maskService.decimalMarker) : inputValue;
           }
-          if (Array.isArray(this._maskService.decimalMarker) && this.decimalMarker === ".") {
-            this._maskService.decimalMarker = ",";
-          }
           if (this._maskService.leadZero && inputValue && this.maskExpression && this.dropSpecialCharacters !== false) {
             inputValue = this._maskService._checkPrecision(this._maskService.maskExpression, inputValue);
           }
-          if (this._maskService.decimalMarker === ",") {
+          if (this.decimalMarker === "," || Array.isArray(this._maskService.decimalMarker) && this.thousandSeparator === ".") {
             inputValue = inputValue.toString().replace(
               ".",
               ","
@@ -2054,10 +2080,7 @@ var _NgxMaskDirective = class _NgxMaskDirective {
         ""
         /* MaskExpression.EMPTY_STRING */
       ).some((char) => this._maskService.specialCharacters.includes(char));
-      if (specialChart && this._inputValue && !mask.includes(
-        "S"
-        /* MaskExpression.LETTER_S */
-      ) || mask.includes(
+      if (specialChart && this._inputValue && this._areAllCharactersInEachStringSame(this._maskExpressionArray) || mask.includes(
         "{"
         /* MaskExpression.CURLY_BRACKETS_LEFT */
       )) {
@@ -2069,6 +2092,9 @@ var _NgxMaskDirective = class _NgxMaskDirective {
           ) ? this._maskService._repeatPatternSymbols(mask) : mask;
           return test;
         } else {
+          if (this._code === "Backspace") {
+            this._allowFewMaskChangeMask = true;
+          }
           const expression = this._maskExpressionArray[this._maskExpressionArray.length - 1] ?? "";
           this._maskValue = this.maskExpression = this._maskService.maskExpression = expression.includes(
             "{"
@@ -2083,11 +2109,23 @@ var _NgxMaskDirective = class _NgxMaskDirective {
           const indexMask = mask.charAt(index);
           return this._maskService._checkSymbolMask(character, indexMask);
         });
-        if (check) {
+        if (check || this._justPasted) {
           this._maskValue = this.maskExpression = this._maskService.maskExpression = mask;
           return check;
         }
       }
+    });
+  }
+  _areAllCharactersInEachStringSame(array) {
+    const specialCharacters = this._maskService.specialCharacters;
+    function removeSpecialCharacters(str) {
+      const regex = new RegExp(`[${specialCharacters.map((ch) => `\\${ch}`).join("")}]`, "g");
+      return str.replace(regex, "");
+    }
+    const processedArr = array.map(removeSpecialCharacters);
+    return processedArr.every((str) => {
+      const uniqueCharacters = new Set(str);
+      return uniqueCharacters.size === 1;
     });
   }
 };

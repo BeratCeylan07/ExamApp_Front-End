@@ -10,7 +10,7 @@ export class AuthLoginService {
 
 
   // private _ENDPOINTURL = 'https://localhost:7016/api/Auth/LoginAction/Login';
-   private _ENDPOINTURL = 'https://beratceylan0007.bsite.net/api/Auth/LoginAction/Login'
+   private _ENDPOINTURL = 'https://examapi.somee.com/api/Auth/LoginAction/Login'
   constructor(private _http: HttpClient,private _router: Router) { }
   
   getLogin(obj: any): Observable<any> {
